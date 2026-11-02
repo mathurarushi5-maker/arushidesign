@@ -1,0 +1,91 @@
+{
+  "site": {
+    "name": "Arushi",
+    "title": "Arushi — Product Designer",
+    "tagline": "Product designer who cares about outcomes, not just outputs.",
+    "intro": "Currently a lead product designer at Adobe. Over 8+ years I've worn many hats, from retail banker to risk analyst to product designer. I love figuring out what people need, building it, and making it better over time.",
+    "linkedin": "https://www.linkedin.com/in/arushimathur10/",
+    "instagram": "https://www.instagram.com/arushi_mathur10/",
+    "behance": "",
+    "email": "arushidesigns01@gmail.com"
+  },
+  "thumbs": {
+    "creative-flow-ai": {"type": "device", "stage": "#C9C1FF", "main": "creative-flow-ai/03.webp", "floats": ["creative-flow-ai/04.webp", "creative-flow-ai/05.webp"]},
+    "tactilebrush": {"type": "device", "stage": "#FFBE9F", "main": "tactilebrush/01.webp", "floats": ["tactilebrush/05.webp", "tactilebrush/07.webp"]},
+    "netflix-game-discovery": {"type": "stat", "stage": "#141414", "stat": "+15%", "label": "game discovery and first-time player conversion in 6 months", "floats": ["netflix-game-discovery/06.webp", "netflix-game-discovery/17.webp"]},
+    "catalyst-bank": {"type": "collage", "stage": "#C5D68F", "imgs": ["catalyst-bank/04.webp", "catalyst-bank/02.webp", "catalyst-bank/17.webp"]},
+    "mau-jewels": {"type": "collage", "stage": "#D9A7E0", "imgs": ["mau-jewels/14.webp", "mau-jewels/12.webp", "mau-jewels/06.webp"]},
+    "sticks-and-wicks": {"type": "collage", "stage": "#B9A5E3", "imgs": ["sticks-and-wicks/01.webp", "sticks-and-wicks/03.webp", "sticks-and-wicks/04.webp"]}
+  },
+  "private": {
+    "title": "Adobe",
+    "kind": "Lead product design · B2B",
+    "summary": "Designing intuitive B2B experiences: improving workflows, shipping new features and building scalable design frameworks.",
+    "tags": ["B2B", "Workflows", "Design systems"],
+    "note": "Case study available on request"
+  },
+  "featured": ["creative-flow-ai", "netflix-game-discovery", "tactilebrush", "catalyst-bank"],
+  "more": ["mau-jewels", "sticks-and-wicks"],
+  "experience": [
+    {"when": "Mar 2026 — Now", "role": "Experience Designer", "org": "Adobe", "where": "India (Hybrid)", "desc": "Driving intuitive digital solutions for B2B experiences by improving workflows and developing new features. Leading iterative design through user testing and insights, and building scalable design frameworks."},
+    {"when": "Jan 2024 — Nov 2025", "role": "Freelancer", "org": "Independent", "where": "Remote", "desc": "Crafted visual stories and managed digital assets for businesses, delivering strategy that resonates with the target market."},
+    {"when": "Mar 2023 — Dec 2024", "role": "Digital Content Specialist", "org": "Lloyds Banking Group", "where": "Bristol (Hybrid)", "desc": "Led the BoS and Lloyds web revamp, redesigned 225+ digital assets across 25 audience segments and launched weekly app updates. Boosted user satisfaction 30% through data-driven design."},
+    {"when": "May 2022 — Mar 2023", "role": "Credit Risk Analyst", "org": "Backhorse (LBG)", "where": "Cardiff (Hybrid)", "desc": "Boosted credit risk accuracy 15% using SAS and Excel, saved $200K annually through data visualisation and cut non-performing loans 10%."}
+  ],
+  "projects": [
+    {
+      "slug": "tactilebrush", "title": "Tactile Brush", "kind": "Case study",
+      "tags": ["Human-Computer Interaction", "User Research"],
+      "color": "#FFD9C7", "cover": "tactilebrush/01.webp",
+      "summary": "A haptic feedback system that bridges the tactile gap between digital and traditional painting.",
+      "intro": "Can gesture-based and haptic interactions make digital creation more intuitive, expressive and physically sustainable? Tactile Brush explores a multisensory interface for realistic digital painting.",
+      "meta": {"Role": "HCI Researcher & Interaction Designer", "Duration": "5 weeks", "Tools": "Figma, Adobe Fresco, Sensel Morph / Apple Pencil", "Type": "Multisensory interaction research"},
+      "stats": [["50%", "faster skill transfer"], ["34%", "improved stroke accuracy"], ["31%", "higher user satisfaction"], ["91%", "of artists prefer haptics"]]
+    },
+    {
+      "slug": "creative-flow-ai", "title": "CreativeFlow AI", "kind": "UX case study · GenAI",
+      "tags": ["AI", "Product design", "Design system"],
+      "color": "#DCD6FF", "cover": "creative-flow-ai/03.webp",
+      "summary": "An AI-powered assistant that takes creators from script to final cut.",
+      "intro": "A concept platform helping creators, marketers and businesses produce video faster, with intelligent writing assistance, automated B-roll suggestions and mood-based music matching.",
+      "meta": {"Role": "UX / Product Designer", "Duration": "4 weeks", "Tools": "Claude Code, Claude Design", "Type": "Concept project"},
+      "stats": [["6", "core screens"], ["45+", "components"], ["60%", "time saved"]],
+      "challenge": "Creators spend around 60% of their time on non-creative tasks like finding stock footage and music. How might AI reduce friction in the creative workflow?",
+      "insight": "Users don't want AI to replace their creativity. They want it to handle the tedious parts so they can focus on telling their story."
+    },
+    {
+      "slug": "netflix-game-discovery", "title": "Netflix Games Discovery", "kind": "Product strategy",
+      "tags": ["Product strategy", "Data-driven design"],
+      "color": "#FFC9C9", "cover": "netflix-game-discovery/01.webp",
+      "summary": "How might we lift game discovery and first-time player conversion by 15% in six months?",
+      "intro": "A product strategy case study on creating a seamless bridge between Netflix's content and its gaming experience.",
+      "meta": {"Role": "Product Manager (portfolio project)", "Timeline": "January 2026", "Focus": "Product strategy, engagement, cross-platform", "Tools": "Figma, Google Analytics (conceptual), A/B testing"}
+    },
+    {
+      "slug": "catalyst-bank", "title": "Catalyst Bank", "kind": "Brand · Web",
+      "tags": ["Brand strategy", "Visual identity", "Landing page"],
+      "color": "#D9E4B5", "cover": "catalyst-bank/01.webp",
+      "summary": "A brand identity and landing page for a UK business bank that acts as a growth partner.",
+      "intro": "Catalyst Bank helps entrepreneurs and small business owners. The goal was a clean, elegant identity and landing page that speaks to people looking to elevate their business.",
+      "meta": {"Tools": "Figma, Adobe Illustrator, ChatGPT, Canva"},
+      "vision": "To make banking easier for small businesses by being their growth partner, their catalyst to success.",
+      "mission": "To become a leader in business banking for entrepreneurs by delivering reliable financial support and connectivity to technology."
+    },
+    {
+      "slug": "mau-jewels", "title": "Mau Jewels", "kind": "Brand",
+      "tags": ["Brand strategy", "Visual identity"],
+      "color": "#E7C6EB", "cover": "mau-jewels/01.webp",
+      "summary": "A lotus-inspired identity for dainty, artisanal jewellery.",
+      "intro": "A brand identity for customers who love expressing themselves through jewellery, inspiring confidence and celebrating womanhood from product to visual identity.",
+      "meta": {"Tools": "Adobe Illustrator, ChatGPT, Canva"}
+    },
+    {
+      "slug": "sticks-and-wicks", "title": "Sticks & Wicks", "kind": "Brand · Packaging",
+      "tags": ["Brand strategy", "Packaging"],
+      "color": "#C9E5B0", "cover": "sticks-and-wicks/01.webp",
+      "summary": "A quirky, minimal brand for homegrown soy candles inspired by seasonal fruit.",
+      "intro": "A fun but premium identity for environmentally conscious, aesthetic customers. The hand-drawn '&' joins the S and W and echoes the fumes of a candle wick.",
+      "meta": {"Tools": "Adobe Illustrator, Nano Banana Pro, Claude Sonnet 4.5, Canva"}
+    }
+  ]
+}
