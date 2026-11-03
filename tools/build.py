@@ -180,6 +180,10 @@ def index():
       <ul class="exp">{exp}
       </ul>
     </div>
+    <div class="sticker a1" data-drag><span>ex-bank<br>teller</span></div>
+    <div class="sticker a2" data-drag><span>risk<br>analyst</span></div>
+    <div class="sticker a3" data-drag aria-hidden="true">✦</div>
+    <div class="sticker a4" data-drag><span>now:<br>designer</span></div>
   </section>
 
   <section id="contact" class="contact">
@@ -187,6 +191,9 @@ def index():
     <h2 class="reveal">Work with <em>me.</em></h2>
     {email}
     <div class="social">{socials()}</div>
+    <div class="sticker c1" data-drag data-pop aria-hidden="true">👋</div>
+    <div class="sticker c2" data-drag data-pop><span>let's<br>talk!</span></div>
+    <div class="sticker c3" data-drag data-pop aria-hidden="true">✺</div>
   </section>
 </main>
 <footer><span>© {2026} Arushi</span><span>Designed &amp; built by hand</span></footer>
