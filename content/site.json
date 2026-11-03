@@ -10,82 +10,324 @@
     "email": "arushidesigns01@gmail.com"
   },
   "thumbs": {
-    "creative-flow-ai": {"type": "device", "stage": "#C9C1FF", "main": "creative-flow-ai/03.webp", "floats": ["creative-flow-ai/04.webp", "creative-flow-ai/05.webp"]},
-    "tactilebrush": {"type": "device", "stage": "#FFBE9F", "main": "tactilebrush/01.webp", "floats": ["tactilebrush/05.webp", "tactilebrush/07.webp"]},
-    "netflix-game-discovery": {"type": "stat", "stage": "#141414", "stat": "+15%", "label": "game discovery and first-time player conversion in 6 months", "floats": ["netflix-game-discovery/06.webp", "netflix-game-discovery/17.webp"]},
-    "catalyst-bank": {"type": "collage", "stage": "#C5D68F", "imgs": ["catalyst-bank/04.webp", "catalyst-bank/02.webp", "catalyst-bank/17.webp"]},
-    "mau-jewels": {"type": "collage", "stage": "#D9A7E0", "imgs": ["mau-jewels/14.webp", "mau-jewels/12.webp", "mau-jewels/06.webp"]},
-    "sticks-and-wicks": {"type": "collage", "stage": "#B9A5E3", "imgs": ["sticks-and-wicks/01.webp", "sticks-and-wicks/03.webp", "sticks-and-wicks/04.webp"]}
+    "creative-flow-ai": {
+      "type": "device",
+      "stage": "#C9C1FF",
+      "main": "creative-flow-ai/06.webp",
+      "floats": [
+        "creative-flow-ai/03.webp",
+        "creative-flow-ai/04.webp"
+      ]
+    },
+    "tactilebrush": {
+      "type": "device",
+      "stage": "#FFBE9F",
+      "main": "tactilebrush/01.webp",
+      "floats": [
+        "tactilebrush/05.webp",
+        "tactilebrush/07.webp"
+      ]
+    },
+    "netflix-game-discovery": {
+      "type": "stat",
+      "stage": "#141414",
+      "stat": "+15%",
+      "label": "game discovery and first-time player conversion in 6 months",
+      "floats": [
+        "netflix-game-discovery/06.webp",
+        "netflix-game-discovery/17.webp"
+      ]
+    },
+    "catalyst-bank": {
+      "type": "device",
+      "plain": true,
+      "stage": "#C5D68F",
+      "main": "catalyst-bank/01.webp",
+      "floats": [
+        "catalyst-bank/12.webp",
+        "catalyst-bank/07.webp"
+      ],
+      "cut": true
+    },
+    "mau-jewels": {
+      "type": "collage",
+      "stage": "#D9A7E0",
+      "imgs": [
+        "mau-jewels/14.webp",
+        "mau-jewels/12.webp",
+        "mau-jewels/06.webp"
+      ]
+    },
+    "sticks-and-wicks": {
+      "type": "collage",
+      "stage": "#B9A5E3",
+      "imgs": [
+        "sticks-and-wicks/01.webp",
+        "sticks-and-wicks/03.webp",
+        "sticks-and-wicks/04.webp"
+      ]
+    }
   },
   "private": {
     "title": "Adobe",
     "kind": "Lead product design · B2B",
     "summary": "Designing intuitive B2B experiences: improving workflows, shipping new features and building scalable design frameworks.",
-    "tags": ["B2B", "Workflows", "Design systems"],
+    "tags": [
+      "B2B",
+      "Workflows",
+      "Design systems"
+    ],
     "note": "Case study available on request"
   },
-  "featured": ["creative-flow-ai", "netflix-game-discovery", "tactilebrush", "catalyst-bank"],
-  "more": ["mau-jewels", "sticks-and-wicks"],
+  "featured": [
+    "creative-flow-ai",
+    "netflix-game-discovery",
+    "tactilebrush",
+    "catalyst-bank"
+  ],
+  "more": [
+    "mau-jewels",
+    "sticks-and-wicks"
+  ],
   "experience": [
-    {"when": "Mar 2026 — Now", "role": "Experience Designer", "org": "Adobe", "where": "India (Hybrid)", "desc": "Driving intuitive digital solutions for B2B experiences by improving workflows and developing new features. Leading iterative design through user testing and insights, and building scalable design frameworks."},
-    {"when": "Jan 2024 — Nov 2025", "role": "Freelancer", "org": "Independent", "where": "Remote", "desc": "Crafted visual stories and managed digital assets for businesses, delivering strategy that resonates with the target market."},
-    {"when": "Mar 2023 — Dec 2024", "role": "Digital Content Specialist", "org": "Lloyds Banking Group", "where": "Bristol (Hybrid)", "desc": "Led the BoS and Lloyds web revamp, redesigned 225+ digital assets across 25 audience segments and launched weekly app updates. Boosted user satisfaction 30% through data-driven design."},
-    {"when": "May 2022 — Mar 2023", "role": "Credit Risk Analyst", "org": "Backhorse (LBG)", "where": "Cardiff (Hybrid)", "desc": "Boosted credit risk accuracy 15% using SAS and Excel, saved $200K annually through data visualisation and cut non-performing loans 10%."}
+    {
+      "when": "Mar 2026 — Now",
+      "role": "Experience Designer",
+      "org": "Adobe",
+      "where": "India (Hybrid)",
+      "desc": "Driving intuitive digital solutions for B2B experiences by improving workflows and developing new features. Leading iterative design through user testing and insights, and building scalable design frameworks."
+    },
+    {
+      "when": "Jan 2024 — Nov 2025",
+      "role": "Freelancer",
+      "org": "Independent",
+      "where": "Remote",
+      "desc": "Crafted visual stories and managed digital assets for businesses, delivering strategy that resonates with the target market."
+    },
+    {
+      "when": "Mar 2023 — Dec 2024",
+      "role": "Digital Content Specialist",
+      "org": "Lloyds Banking Group",
+      "where": "Bristol (Hybrid)",
+      "desc": "Led the BoS and Lloyds web revamp, redesigned 225+ digital assets across 25 audience segments and launched weekly app updates. Boosted user satisfaction 30% through data-driven design."
+    },
+    {
+      "when": "May 2022 — Mar 2023",
+      "role": "Credit Risk Analyst",
+      "org": "Backhorse (LBG)",
+      "where": "Cardiff (Hybrid)",
+      "desc": "Boosted credit risk accuracy 15% using SAS and Excel, saved $200K annually through data visualisation and cut non-performing loans 10%."
+    }
   ],
   "projects": [
     {
-      "slug": "tactilebrush", "title": "Tactile Brush", "kind": "Case study",
-      "tags": ["Human-Computer Interaction", "User Research"],
-      "color": "#FFD9C7", "cover": "tactilebrush/01.webp",
+      "slug": "tactilebrush",
+      "title": "Tactile Brush",
+      "kind": "Case study",
+      "tags": [
+        "Human-Computer Interaction",
+        "User Research"
+      ],
+      "color": "#FFD9C7",
+      "cover": "tactilebrush/01.webp",
       "summary": "A haptic feedback system that bridges the tactile gap between digital and traditional painting.",
       "intro": "Can gesture-based and haptic interactions make digital creation more intuitive, expressive and physically sustainable? Tactile Brush explores a multisensory interface for realistic digital painting.",
-      "meta": {"Role": "HCI Researcher & Interaction Designer", "Duration": "5 weeks", "Tools": "Figma, Adobe Fresco, Sensel Morph / Apple Pencil", "Type": "Multisensory interaction research"},
-      "stats": [["50%", "faster skill transfer"], ["34%", "improved stroke accuracy"], ["31%", "higher user satisfaction"], ["91%", "of artists prefer haptics"]]
+      "meta": {
+        "Role": "HCI Researcher & Interaction Designer",
+        "Duration": "5 weeks",
+        "Tools": "Figma, Adobe Fresco, Sensel Morph / Apple Pencil",
+        "Type": "Multisensory interaction research"
+      },
+      "stats": [
+        [
+          "50%",
+          "faster skill transfer"
+        ],
+        [
+          "34%",
+          "improved stroke accuracy"
+        ],
+        [
+          "31%",
+          "higher user satisfaction"
+        ],
+        [
+          "91%",
+          "of artists prefer haptics"
+        ]
+      ]
     },
     {
-      "slug": "creative-flow-ai", "title": "CreativeFlow AI", "kind": "UX case study · GenAI",
-      "tags": ["AI", "Product design", "Design system"],
-      "color": "#DCD6FF", "cover": "creative-flow-ai/03.webp",
+      "slug": "creative-flow-ai",
+      "title": "CreativeFlow AI",
+      "kind": "UX case study · GenAI",
+      "tags": [
+        "AI",
+        "Product design",
+        "Design system"
+      ],
+      "color": "#DCD6FF",
+      "cover": "creative-flow-ai/03.webp",
       "summary": "An AI-powered assistant that takes creators from script to final cut.",
       "intro": "A concept platform helping creators, marketers and businesses produce video faster, with intelligent writing assistance, automated B-roll suggestions and mood-based music matching.",
-      "meta": {"Role": "UX / Product Designer", "Duration": "4 weeks", "Tools": "Claude Code, Claude Design", "Type": "Concept project"},
-      "stats": [["6", "core screens"], ["45+", "components"], ["60%", "time saved"]],
+      "meta": {
+        "Role": "UX / Product Designer",
+        "Duration": "4 weeks",
+        "Tools": "Claude Code, Claude Design",
+        "Type": "Concept project"
+      },
+      "stats": [
+        [
+          "6",
+          "core screens"
+        ],
+        [
+          "45+",
+          "components"
+        ],
+        [
+          "60%",
+          "time saved"
+        ]
+      ],
       "challenge": "Creators spend around 60% of their time on non-creative tasks like finding stock footage and music. How might AI reduce friction in the creative workflow?",
       "insight": "Users don't want AI to replace their creativity. They want it to handle the tedious parts so they can focus on telling their story."
     },
     {
-      "slug": "netflix-game-discovery", "title": "Netflix Games Discovery", "kind": "Product strategy",
-      "tags": ["Product strategy", "Data-driven design"],
-      "color": "#FFC9C9", "cover": "netflix-game-discovery/01.webp",
+      "slug": "netflix-game-discovery",
+      "title": "Netflix Games Discovery",
+      "kind": "Product strategy",
+      "tags": [
+        "Product strategy",
+        "Data-driven design"
+      ],
+      "color": "#FFC9C9",
+      "cover": "netflix-game-discovery/01.webp",
       "summary": "How might we lift game discovery and first-time player conversion by 15% in six months?",
       "intro": "A product strategy case study on creating a seamless bridge between Netflix's content and its gaming experience.",
-      "meta": {"Role": "Product Manager (portfolio project)", "Timeline": "January 2026", "Focus": "Product strategy, engagement, cross-platform", "Tools": "Figma, Google Analytics (conceptual), A/B testing"}
+      "meta": {
+        "Role": "Product Manager (portfolio project)",
+        "Timeline": "January 2026",
+        "Focus": "Product strategy, engagement, cross-platform",
+        "Tools": "Figma, Google Analytics (conceptual), A/B testing"
+      }
     },
     {
-      "slug": "catalyst-bank", "title": "Catalyst Bank", "kind": "Brand · Web",
-      "tags": ["Brand strategy", "Visual identity", "Landing page"],
-      "color": "#D9E4B5", "cover": "catalyst-bank/01.webp",
+      "slug": "catalyst-bank",
+      "title": "Catalyst Bank",
+      "kind": "Brand · Web",
+      "tags": [
+        "Brand strategy",
+        "Visual identity",
+        "Landing page"
+      ],
+      "color": "#D9E4B5",
+      "cover": "catalyst-bank/01.webp",
       "summary": "A brand identity and landing page for a UK business bank that acts as a growth partner.",
       "intro": "Catalyst Bank helps entrepreneurs and small business owners. The goal was a clean, elegant identity and landing page that speaks to people looking to elevate their business.",
-      "meta": {"Tools": "Figma, Adobe Illustrator, ChatGPT, Canva"},
+      "meta": {
+        "Tools": "Figma, Adobe Illustrator, ChatGPT, Canva"
+      },
       "vision": "To make banking easier for small businesses by being their growth partner, their catalyst to success.",
       "mission": "To become a leader in business banking for entrepreneurs by delivering reliable financial support and connectivity to technology."
     },
     {
-      "slug": "mau-jewels", "title": "Mau Jewels", "kind": "Brand",
-      "tags": ["Brand strategy", "Visual identity"],
-      "color": "#E7C6EB", "cover": "mau-jewels/01.webp",
+      "slug": "mau-jewels",
+      "title": "Mau Jewels",
+      "kind": "Brand",
+      "tags": [
+        "Brand strategy",
+        "Visual identity"
+      ],
+      "color": "#E7C6EB",
+      "cover": "mau-jewels/01.webp",
       "summary": "A lotus-inspired identity for dainty, artisanal jewellery.",
       "intro": "A brand identity for customers who love expressing themselves through jewellery, inspiring confidence and celebrating womanhood from product to visual identity.",
-      "meta": {"Tools": "Adobe Illustrator, ChatGPT, Canva"}
+      "meta": {
+        "Tools": "Adobe Illustrator, ChatGPT, Canva"
+      }
     },
     {
-      "slug": "sticks-and-wicks", "title": "Sticks & Wicks", "kind": "Brand · Packaging",
-      "tags": ["Brand strategy", "Packaging"],
-      "color": "#C9E5B0", "cover": "sticks-and-wicks/01.webp",
+      "slug": "sticks-and-wicks",
+      "title": "Sticks & Wicks",
+      "kind": "Brand · Packaging",
+      "tags": [
+        "Brand strategy",
+        "Packaging"
+      ],
+      "color": "#C9E5B0",
+      "cover": "sticks-and-wicks/01.webp",
       "summary": "A quirky, minimal brand for homegrown soy candles inspired by seasonal fruit.",
       "intro": "A fun but premium identity for environmentally conscious, aesthetic customers. The hand-drawn '&' joins the S and W and echoes the fumes of a candle wick.",
-      "meta": {"Tools": "Adobe Illustrator, Nano Banana Pro, Claude Sonnet 4.5, Canva"}
+      "meta": {
+        "Tools": "Adobe Illustrator, Nano Banana Pro, Claude Sonnet 4.5, Canva"
+      }
     }
-  ]
+  ],
+  "blog": [
+    {
+      "title": "From Research to Executive Presentation: My AI-Powered Design Workflow",
+      "url": "https://www.arushidesign.com/post/from-research-to-executive-presentation-my-ai-powered-design-workflow",
+      "date": "2026-06-15",
+      "excerpt": "What used to take me three days can now take three hours, if I use AI correctly. As an Experience Designer, I treat AI as amplification, not…",
+      "img": "/assets/img/blog/01.webp"
+    },
+    {
+      "title": "How Generative AI Changed My Design Process (Without Replacing Design Thinking)",
+      "url": "https://www.arushidesign.com/post/how-generative-ai-changed-my-design-process-without-replacing-design-thinking",
+      "date": "2026-06-12",
+      "excerpt": "I’ll be honest! When generative AI started making headlines, my first reaction wasn’t excitement. It was scepticism. I didn’t even give it a try for…",
+      "img": "/assets/img/blog/02.webp"
+    },
+    {
+      "title": "Mobile-First Banking: Design Principles That Convert",
+      "url": "https://www.arushidesign.com/post/mobile-first-banking-design-principles-that-convert",
+      "date": "2025-11-12",
+      "excerpt": "The banking industry has undergone a seismic shift. What was once a sector defined by marble columns and face-to-face interactions is now dominated…",
+      "img": "/assets/img/blog/04.webp"
+    },
+    {
+      "title": "In a Crowded Market, Design Becomes the Differentiator",
+      "url": "https://www.arushidesign.com/post/in-a-crowded-market-design-becomes-the-differentiator",
+      "date": "2025-11-07",
+      "excerpt": "How design is helping UK Fintechs carve out their own space",
+      "img": "/assets/img/blog/03.webp"
+    },
+    {
+      "title": "From TransferWise to Wise: A Masterclass in Global Rebranding",
+      "url": "https://www.arushidesign.com/post/from-transferwise-to-wise-a-masterclass-in-global-rebranding",
+      "date": "2025-10-17",
+      "excerpt": "When 16 million customers trust you with their money, rebranding isn't just a visual refresh—it's a promise renewed. Wise didn't just change its name.…",
+      "img": "/assets/img/blog/06.webp"
+    },
+    {
+      "title": "Revolut's Fintech Brand Evolution: Old vs. New Design",
+      "url": "https://www.arushidesign.com/post/revolut-brand-evolution",
+      "date": "2025-10-06",
+      "excerpt": "Revolut's Brand Evolution: A Look at the Old vs. New Design",
+      "img": "/assets/img/blog/05.webp"
+    }
+  ],
+  "life": {
+    "title": "Beyond the portfolio",
+    "intro": "When the laptop closes, I'm usually lost in a book, scribbling a poem, or making a mess with paint. Slow, human things that keep the rest of my work honest.",
+    "facts": [
+      {
+        "label": "Always reading",
+        "text": "A book is usually within arm's reach. Stories are where most of my ideas start."
+      },
+      {
+        "label": "Poetry on the side",
+        "text": "I write poems to make sense of things I can't fit into a design brief."
+      },
+      {
+        "label": "Paint & pencil",
+        "text": "Painting and sketching keep my hands busy and my eye sharp."
+      },
+      {
+        "label": "AI tinkering",
+        "text": "I experiment with AI for fun too: weird prompts, small tools, happy accidents."
+      }
+    ]
+  }
 }
