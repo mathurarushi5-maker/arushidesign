@@ -1,0 +1,660 @@
+{
+ "tactilebrush": [
+  {
+   "file": "assets/img/tactilebrush/01.webp",
+   "alt": "haptic exp preview.png",
+   "w": 1600,
+   "h": 1591
+  },
+  {
+   "file": "assets/img/tactilebrush/02.webp",
+   "alt": "Leap-Motion-200000PCS-in-Stock-Game-Cont",
+   "w": 549,
+   "h": 366
+  },
+  {
+   "file": "assets/img/tactilebrush/03.webp",
+   "alt": "",
+   "w": 938,
+   "h": 469
+  },
+  {
+   "file": "assets/img/tactilebrush/04.webp",
+   "alt": "",
+   "w": 760,
+   "h": 405
+  },
+  {
+   "file": "assets/img/tactilebrush/05.webp",
+   "alt": "Stylus connection setup 1.png",
+   "w": 1600,
+   "h": 1280
+  },
+  {
+   "file": "assets/img/tactilebrush/06.webp",
+   "alt": "Grip detection and haptic sync.png",
+   "w": 1600,
+   "h": 1280
+  },
+  {
+   "file": "assets/img/tactilebrush/07.webp",
+   "alt": "Sensitivity calliberation.png",
+   "w": 1600,
+   "h": 1328
+  },
+  {
+   "file": "assets/img/tactilebrush/08.webp",
+   "alt": "haptic experience preview 2.png",
+   "w": 1600,
+   "h": 1280
+  }
+ ],
+ "creative-flow-ai": [
+  {
+   "file": "assets/img/creative-flow-ai/01.webp",
+   "alt": "Gradient Background",
+   "w": 1800,
+   "h": 1200
+  },
+  {
+   "file": "assets/img/creative-flow-ai/02.webp",
+   "alt": "Abstract Infinity Loop",
+   "w": 1225,
+   "h": 803
+  },
+  {
+   "file": "assets/img/creative-flow-ai/03.webp",
+   "alt": "Dashboard.png",
+   "w": 1600,
+   "h": 1540
+  },
+  {
+   "file": "assets/img/creative-flow-ai/04.webp",
+   "alt": "Music Matcher.png",
+   "w": 1600,
+   "h": 1280
+  },
+  {
+   "file": "assets/img/creative-flow-ai/05.webp",
+   "alt": "B-roll Finder.png",
+   "w": 1600,
+   "h": 1280
+  },
+  {
+   "file": "assets/img/creative-flow-ai/06.webp",
+   "alt": "Script Output.png",
+   "w": 1600,
+   "h": 1280
+  }
+ ],
+ "netflix-game-discovery": [
+  {
+   "file": "assets/img/netflix-game-discovery/01.webp",
+   "alt": "3.png",
+   "w": 1800,
+   "h": 1013
+  },
+  {
+   "file": "assets/img/netflix-game-discovery/02.webp",
+   "alt": "4.png",
+   "w": 1800,
+   "h": 1013
+  },
+  {
+   "file": "assets/img/netflix-game-discovery/03.webp",
+   "alt": "Netflix Games Discovery & Engagement Redesign.png",
+   "w": 1800,
+   "h": 1013
+  },
+  {
+   "file": "assets/img/netflix-game-discovery/04.webp",
+   "alt": "",
+   "w": 1800,
+   "h": 1013
+  },
+  {
+   "file": "assets/img/netflix-game-discovery/05.webp",
+   "alt": "",
+   "w": 1800,
+   "h": 1013
+  },
+  {
+   "file": "assets/img/netflix-game-discovery/06.webp",
+   "alt": "",
+   "w": 1800,
+   "h": 1013
+  },
+  {
+   "file": "assets/img/netflix-game-discovery/07.webp",
+   "alt": "",
+   "w": 1800,
+   "h": 1013
+  },
+  {
+   "file": "assets/img/netflix-game-discovery/08.webp",
+   "alt": "",
+   "w": 1800,
+   "h": 1013
+  },
+  {
+   "file": "assets/img/netflix-game-discovery/09.webp",
+   "alt": "",
+   "w": 1800,
+   "h": 1013
+  },
+  {
+   "file": "assets/img/netflix-game-discovery/10.webp",
+   "alt": "",
+   "w": 1800,
+   "h": 1013
+  },
+  {
+   "file": "assets/img/netflix-game-discovery/11.webp",
+   "alt": "",
+   "w": 1800,
+   "h": 1013
+  },
+  {
+   "file": "assets/img/netflix-game-discovery/12.webp",
+   "alt": "",
+   "w": 1800,
+   "h": 1013
+  },
+  {
+   "file": "assets/img/netflix-game-discovery/13.webp",
+   "alt": "14.png",
+   "w": 1800,
+   "h": 1013
+  },
+  {
+   "file": "assets/img/netflix-game-discovery/14.webp",
+   "alt": "15.png",
+   "w": 1800,
+   "h": 1013
+  },
+  {
+   "file": "assets/img/netflix-game-discovery/15.webp",
+   "alt": "16.png",
+   "w": 1800,
+   "h": 1013
+  },
+  {
+   "file": "assets/img/netflix-game-discovery/16.webp",
+   "alt": "17.png",
+   "w": 1800,
+   "h": 1013
+  },
+  {
+   "file": "assets/img/netflix-game-discovery/17.webp",
+   "alt": "19.png",
+   "w": 1800,
+   "h": 1013
+  },
+  {
+   "file": "assets/img/netflix-game-discovery/18.webp",
+   "alt": "18.png",
+   "w": 1800,
+   "h": 1013
+  },
+  {
+   "file": "assets/img/netflix-game-discovery/19.webp",
+   "alt": "20.png",
+   "w": 1800,
+   "h": 1013
+  },
+  {
+   "file": "assets/img/netflix-game-discovery/20.webp",
+   "alt": "23.png",
+   "w": 1800,
+   "h": 1013
+  },
+  {
+   "file": "assets/img/netflix-game-discovery/21.webp",
+   "alt": "22.png",
+   "w": 1800,
+   "h": 1013
+  },
+  {
+   "file": "assets/img/netflix-game-discovery/22.webp",
+   "alt": "21.png",
+   "w": 1800,
+   "h": 1013
+  },
+  {
+   "file": "assets/img/netflix-game-discovery/23.webp",
+   "alt": "24.png",
+   "w": 1800,
+   "h": 1013
+  },
+  {
+   "file": "assets/img/netflix-game-discovery/24.webp",
+   "alt": "25.png",
+   "w": 1800,
+   "h": 1013
+  },
+  {
+   "file": "assets/img/netflix-game-discovery/25.webp",
+   "alt": "27.png",
+   "w": 1800,
+   "h": 1013
+  },
+  {
+   "file": "assets/img/netflix-game-discovery/26.webp",
+   "alt": "26.png",
+   "w": 1800,
+   "h": 1013
+  }
+ ],
+ "catalyst-bank": [
+  {
+   "file": "assets/img/catalyst-bank/01.webp",
+   "alt": "3d1f8129bc5edceb_edited.png",
+   "w": 1800,
+   "h": 1069
+  },
+  {
+   "file": "assets/img/catalyst-bank/02.webp",
+   "alt": "261c0bb93cb4cb2d.png",
+   "w": 1800,
+   "h": 1242
+  },
+  {
+   "file": "assets/img/catalyst-bank/03.webp",
+   "alt": "F6EEDA.png",
+   "w": 1800,
+   "h": 1013
+  },
+  {
+   "file": "assets/img/catalyst-bank/04.webp",
+   "alt": "57042bdd7ab66e1a.png",
+   "w": 1800,
+   "h": 1215
+  },
+  {
+   "file": "assets/img/catalyst-bank/05.webp",
+   "alt": "Abstract White Waves",
+   "w": 1800,
+   "h": 675
+  },
+  {
+   "file": "assets/img/catalyst-bank/06.webp",
+   "alt": "",
+   "w": 1563,
+   "h": 1563
+  },
+  {
+   "file": "assets/img/catalyst-bank/07.webp",
+   "alt": "image.png",
+   "w": 962,
+   "h": 962
+  },
+  {
+   "file": "assets/img/catalyst-bank/08.webp",
+   "alt": "Catalyst Bank (25).png",
+   "w": 1563,
+   "h": 1563
+  },
+  {
+   "file": "assets/img/catalyst-bank/09.webp",
+   "alt": "Catalyst Bank (26).png",
+   "w": 1563,
+   "h": 1563
+  },
+  {
+   "file": "assets/img/catalyst-bank/10.webp",
+   "alt": "",
+   "w": 1800,
+   "h": 1013
+  },
+  {
+   "file": "assets/img/catalyst-bank/11.webp",
+   "alt": "Abstract White Waves",
+   "w": 1800,
+   "h": 870
+  },
+  {
+   "file": "assets/img/catalyst-bank/12.webp",
+   "alt": "",
+   "w": 1563,
+   "h": 1563
+  },
+  {
+   "file": "assets/img/catalyst-bank/13.webp",
+   "alt": "image.png",
+   "w": 638,
+   "h": 942
+  },
+  {
+   "file": "assets/img/catalyst-bank/14.webp",
+   "alt": "Catalyst Bank (14).png",
+   "w": 1563,
+   "h": 1563
+  },
+  {
+   "file": "assets/img/catalyst-bank/15.webp",
+   "alt": "",
+   "w": 1563,
+   "h": 1563
+  },
+  {
+   "file": "assets/img/catalyst-bank/16.webp",
+   "alt": "",
+   "w": 1563,
+   "h": 1563
+  },
+  {
+   "file": "assets/img/catalyst-bank/17.webp",
+   "alt": "",
+   "w": 1563,
+   "h": 1563
+  },
+  {
+   "file": "assets/img/catalyst-bank/18.webp",
+   "alt": "",
+   "w": 1563,
+   "h": 1563
+  },
+  {
+   "file": "assets/img/catalyst-bank/19.webp",
+   "alt": "",
+   "w": 1563,
+   "h": 1563
+  },
+  {
+   "file": "assets/img/catalyst-bank/20.webp",
+   "alt": "",
+   "w": 1563,
+   "h": 1563
+  },
+  {
+   "file": "assets/img/catalyst-bank/21.webp",
+   "alt": "",
+   "w": 1563,
+   "h": 1563
+  },
+  {
+   "file": "assets/img/catalyst-bank/22.webp",
+   "alt": "Landing Page.png",
+   "w": 582,
+   "h": 1800
+  },
+  {
+   "file": "assets/img/catalyst-bank/23.webp",
+   "alt": "Catalyst Bank (17).png",
+   "w": 1563,
+   "h": 1563
+  }
+ ],
+ "mau-jewels": [
+  {
+   "file": "assets/img/mau-jewels/01.webp",
+   "alt": "",
+   "w": 1800,
+   "h": 1440
+  },
+  {
+   "file": "assets/img/mau-jewels/02.webp",
+   "alt": "",
+   "w": 1800,
+   "h": 1440
+  },
+  {
+   "file": "assets/img/mau-jewels/03.webp",
+   "alt": "",
+   "w": 1800,
+   "h": 1440
+  },
+  {
+   "file": "assets/img/mau-jewels/04.webp",
+   "alt": "Mau Jewels (Card (Square)) (6).png",
+   "w": 1800,
+   "h": 1800
+  },
+  {
+   "file": "assets/img/mau-jewels/05.webp",
+   "alt": "Mau Jewels (Card (Square)) (5).png",
+   "w": 1800,
+   "h": 1800
+  },
+  {
+   "file": "assets/img/mau-jewels/06.webp",
+   "alt": "Mau Jewels Mood Board (1).png",
+   "w": 1800,
+   "h": 1213
+  },
+  {
+   "file": "assets/img/mau-jewels/07.webp",
+   "alt": "9.png",
+   "w": 1800,
+   "h": 1440
+  },
+  {
+   "file": "assets/img/mau-jewels/08.webp",
+   "alt": "7.png",
+   "w": 1800,
+   "h": 1440
+  },
+  {
+   "file": "assets/img/mau-jewels/09.webp",
+   "alt": "5.png",
+   "w": 1800,
+   "h": 1440
+  },
+  {
+   "file": "assets/img/mau-jewels/10.webp",
+   "alt": "2.png",
+   "w": 1800,
+   "h": 1440
+  },
+  {
+   "file": "assets/img/mau-jewels/11.webp",
+   "alt": "White Silk Fabric",
+   "w": 1800,
+   "h": 1200
+  },
+  {
+   "file": "assets/img/mau-jewels/12.webp",
+   "alt": "Mau Jewels (3).png",
+   "w": 1800,
+   "h": 1013
+  },
+  {
+   "file": "assets/img/mau-jewels/13.webp",
+   "alt": "Untitled design (4).png",
+   "w": 1500,
+   "h": 500
+  },
+  {
+   "file": "assets/img/mau-jewels/14.webp",
+   "alt": "Mau Jewels Mood Board (3)_edited.jpg",
+   "w": 1800,
+   "h": 1800
+  }
+ ],
+ "sticks-and-wicks": [
+  {
+   "file": "assets/img/sticks-and-wicks/01.webp",
+   "alt": "Gemini_Generated_Image_4ookb64ookb64ook.png",
+   "w": 1800,
+   "h": 1208
+  },
+  {
+   "file": "assets/img/sticks-and-wicks/02.webp",
+   "alt": "dieline and boxes (11).png",
+   "w": 1280,
+   "h": 720
+  },
+  {
+   "file": "assets/img/sticks-and-wicks/03.webp",
+   "alt": "download (31)_edited.jpg",
+   "w": 1800,
+   "h": 900
+  },
+  {
+   "file": "assets/img/sticks-and-wicks/04.webp",
+   "alt": "dieline and boxes (5).png",
+   "w": 1280,
+   "h": 720
+  },
+  {
+   "file": "assets/img/sticks-and-wicks/05.webp",
+   "alt": "Gemini_Generated_Image_xmupf6xmupf6xmup.png",
+   "w": 1800,
+   "h": 1800
+  },
+  {
+   "file": "assets/img/sticks-and-wicks/06.webp",
+   "alt": "dieline and boxes (2).png",
+   "w": 1280,
+   "h": 720
+  },
+  {
+   "file": "assets/img/sticks-and-wicks/07.webp",
+   "alt": "Hqc88IAXRZM (2)_edited.png",
+   "w": 1800,
+   "h": 1012
+  },
+  {
+   "file": "assets/img/sticks-and-wicks/08.webp",
+   "alt": "Gemini_Generated_Image_tccqt8tccqt8tccq.png",
+   "w": 1024,
+   "h": 1024
+  },
+  {
+   "file": "assets/img/sticks-and-wicks/09.webp",
+   "alt": "dieline and boxes (1).png",
+   "w": 1280,
+   "h": 720
+  },
+  {
+   "file": "assets/img/sticks-and-wicks/10.webp",
+   "alt": "download (35)_edited.jpg",
+   "w": 1664,
+   "h": 832
+  },
+  {
+   "file": "assets/img/sticks-and-wicks/11.webp",
+   "alt": "",
+   "w": 1800,
+   "h": 1013
+  },
+  {
+   "file": "assets/img/sticks-and-wicks/12.webp",
+   "alt": "dieline and boxes (10).png",
+   "w": 1280,
+   "h": 720
+  },
+  {
+   "file": "assets/img/sticks-and-wicks/13.webp",
+   "alt": "",
+   "w": 1280,
+   "h": 720
+  },
+  {
+   "file": "assets/img/sticks-and-wicks/14.webp",
+   "alt": "",
+   "w": 1800,
+   "h": 1013
+  }
+ ],
+ "profile": [
+  {
+   "file": "assets/img/profile/01.webp",
+   "alt": "Untitled design (6).png",
+   "w": 1067,
+   "h": 1800
+  }
+ ],
+ "illustrations": [
+  {
+   "file": "assets/img/illustrations/01.webp",
+   "alt": "Untitled design (8).png",
+   "w": 614,
+   "h": 1800
+  },
+  {
+   "file": "assets/img/illustrations/02.webp",
+   "alt": "Sketching Storyboard Panels",
+   "w": 1800,
+   "h": 1200
+  },
+  {
+   "file": "assets/img/illustrations/03.webp",
+   "alt": "",
+   "w": 1440,
+   "h": 1800
+  },
+  {
+   "file": "assets/img/illustrations/04.webp",
+   "alt": "",
+   "w": 1800,
+   "h": 1200
+  },
+  {
+   "file": "assets/img/illustrations/05.webp",
+   "alt": "",
+   "w": 1800,
+   "h": 1200
+  },
+  {
+   "file": "assets/img/illustrations/06.webp",
+   "alt": "",
+   "w": 1800,
+   "h": 1758
+  },
+  {
+   "file": "assets/img/illustrations/07.webp",
+   "alt": "",
+   "w": 1800,
+   "h": 1704
+  },
+  {
+   "file": "assets/img/illustrations/08.webp",
+   "alt": "",
+   "w": 1800,
+   "h": 1200
+  },
+  {
+   "file": "assets/img/illustrations/09.webp",
+   "alt": "",
+   "w": 1800,
+   "h": 1013
+  },
+  {
+   "file": "assets/img/illustrations/10.webp",
+   "alt": "",
+   "w": 1800,
+   "h": 1197
+  },
+  {
+   "file": "assets/img/illustrations/11.webp",
+   "alt": "",
+   "w": 1800,
+   "h": 1168
+  },
+  {
+   "file": "assets/img/illustrations/12.webp",
+   "alt": "",
+   "w": 1800,
+   "h": 1201
+  },
+  {
+   "file": "assets/img/illustrations/13.webp",
+   "alt": "",
+   "w": 1800,
+   "h": 1800
+  },
+  {
+   "file": "assets/img/illustrations/14.webp",
+   "alt": "",
+   "w": 1800,
+   "h": 1165
+  },
+  {
+   "file": "assets/img/illustrations/15.webp",
+   "alt": "",
+   "w": 1800,
+   "h": 1179
+  }
+ ]
+}
