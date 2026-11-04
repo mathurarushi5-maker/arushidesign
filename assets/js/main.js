@@ -45,7 +45,7 @@ document.querySelectorAll("[data-drag]").forEach((el) => {
 
 // 3D tilt on project art
 if (!reduce) {
-  document.querySelectorAll("[data-tilt]").forEach((el) => {
+  document.querySelectorAll(".lock[data-tilt]").forEach((el) => {
     el.addEventListener("pointermove", (ev) => {
       const r = el.getBoundingClientRect();
       const x = (ev.clientX - r.left) / r.width - 0.5;
@@ -99,3 +99,18 @@ document.querySelectorAll("a[href^='mailto:']").forEach((a) => {
     });
   });
 });
+
+// project filters
+const chips = document.querySelectorAll(".chip[data-filter]");
+const applyFilter = (f) => {
+  chips.forEach((c) => c.classList.toggle("on", c.dataset.filter === f));
+  let n = 0;
+  document.querySelectorAll(".tile[data-cat]").forEach((el) => {
+    const show = f === "all" || el.dataset.cat.split(" ").includes(f);
+    el.hidden = !show;
+    if (show) n++;
+  });
+  const em = document.querySelector(".empty");
+  if (em) em.hidden = n > 0;
+};
+chips.forEach((c) => c.addEventListener("click", () => applyFilter(c.dataset.filter)));

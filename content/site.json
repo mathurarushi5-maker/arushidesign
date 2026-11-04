@@ -29,14 +29,14 @@
       ]
     },
     "netflix-game-discovery": {
-      "type": "stat",
-      "stage": "#141414",
-      "stat": "+15%",
-      "label": "game discovery and first-time player conversion in 6 months",
+      "type": "device",
+      "stage": "#E6CFC9",
+      "main": "netflix-game-discovery/01.webp",
       "floats": [
         "netflix-game-discovery/06.webp",
         "netflix-game-discovery/17.webp"
-      ]
+      ],
+      "sbg": "#ffffff"
     },
     "catalyst-bank": {
       "type": "device",
@@ -50,22 +50,24 @@
       "cut": true
     },
     "mau-jewels": {
-      "type": "collage",
+      "type": "device",
       "stage": "#D9A7E0",
-      "imgs": [
-        "mau-jewels/14.webp",
+      "main": "mau-jewels/01.webp",
+      "floats": [
         "mau-jewels/12.webp",
         "mau-jewels/06.webp"
-      ]
+      ],
+      "sbg": "#74335f"
     },
     "sticks-and-wicks": {
-      "type": "collage",
+      "type": "device",
       "stage": "#B9A5E3",
-      "imgs": [
-        "sticks-and-wicks/01.webp",
-        "sticks-and-wicks/03.webp",
-        "sticks-and-wicks/04.webp"
-      ]
+      "main": "sticks-and-wicks/04.webp",
+      "floats": [
+        "sticks-and-wicks/07.webp",
+        "sticks-and-wicks/10.webp"
+      ],
+      "sbg": "#fffbd6"
     }
   },
   "private": {
@@ -92,31 +94,45 @@
   "experience": [
     {
       "when": "Mar 2026 — Now",
-      "role": "Experience Designer",
+      "role": "Product Designer (UX/UI)",
       "org": "Adobe",
-      "where": "India (Hybrid)",
-      "desc": "Driving intuitive digital solutions for B2B experiences by improving workflows and developing new features. Leading iterative design through user testing and insights, and building scalable design frameworks."
+      "where": "India",
+      "desc": "Sole designer on Sales Qualifier, an AI-powered B2B sales assistant: 30+ features in 4 months across SDR workflows, AI reply management and onboarding. Cut the backlog 40%, lifted onboarding bookings 35% and won the Gen AI Hackathon 2026."
     },
     {
       "when": "Jan 2024 — Nov 2025",
-      "role": "Freelancer",
-      "org": "Independent",
+      "role": "UX/UI Designer",
+      "org": "Freelance",
       "where": "Remote",
-      "desc": "Crafted visual stories and managed digital assets for businesses, delivering strategy that resonates with the target market."
+      "desc": "Designed a 0-to-1 customer acquisition platform across 15+ sprint releases, built a scalable design system and tested with 200+ users to lift engagement 40%."
     },
     {
-      "when": "Mar 2023 — Dec 2024",
-      "role": "Digital Content Specialist",
+      "when": "Mar 2023 — Dec 2023",
+      "role": "Product Specialist, Digital Assets",
       "org": "Lloyds Banking Group",
-      "where": "Bristol (Hybrid)",
-      "desc": "Led the BoS and Lloyds web revamp, redesigned 225+ digital assets across 25 audience segments and launched weekly app updates. Boosted user satisfaction 30% through data-driven design."
+      "where": "London",
+      "desc": "Owned interaction design across 225+ digital touchpoints, ran 30+ A/B tests and drove £400K pipeline growth. Mentored content designers and junior analysts."
     },
     {
       "when": "May 2022 — Mar 2023",
-      "role": "Credit Risk Analyst",
-      "org": "Backhorse (LBG)",
-      "where": "Cardiff (Hybrid)",
-      "desc": "Boosted credit risk accuracy 15% using SAS and Excel, saved $200K annually through data visualisation and cut non-performing loans 10%."
+      "role": "Product Analyst, Credit Risk",
+      "org": "Lloyds Banking Group (Blackhorse)",
+      "where": "Cardiff",
+      "desc": "Cut credit decisioning time 22% through API-led platform requirements and built SQL and Power BI dashboards that raised stakeholder adoption 14%."
+    },
+    {
+      "when": "Nov 2021 — May 2022",
+      "role": "Customer Experience Specialist",
+      "org": "Lloyds Banking Group",
+      "where": "London",
+      "desc": "Cut delivery cycle time 30% with rapid iteration and experimentation, and lifted digital adoption 14% by optimising journeys and onboarding content."
+    },
+    {
+      "when": "Aug 2017 — Mar 2020",
+      "role": "Customer Operations Analyst",
+      "org": "Punjab National Bank",
+      "where": "India",
+      "desc": "Grew an INR 250 crore portfolio from 8,000 to 25,000 accounts and led the 0-to-1 launch of PNB One, reaching 4,000+ users in Q1."
     }
   ],
   "projects": [
@@ -155,7 +171,8 @@
           "91%",
           "of artists prefer haptics"
         ]
-      ]
+      ],
+      "cat": "research product"
     },
     {
       "slug": "creative-flow-ai",
@@ -191,7 +208,8 @@
         ]
       ],
       "challenge": "Creators spend around 60% of their time on non-creative tasks like finding stock footage and music. How might AI reduce friction in the creative workflow?",
-      "insight": "Users don't want AI to replace their creativity. They want it to handle the tedious parts so they can focus on telling their story."
+      "insight": "Users don't want AI to replace their creativity. They want it to handle the tedious parts so they can focus on telling their story.",
+      "cat": "ai product"
     },
     {
       "slug": "netflix-game-discovery",
@@ -210,7 +228,8 @@
         "Timeline": "January 2026",
         "Focus": "Product strategy, engagement, cross-platform",
         "Tools": "Figma, Google Analytics (conceptual), A/B testing"
-      }
+      },
+      "cat": "research product"
     },
     {
       "slug": "catalyst-bank",
@@ -229,7 +248,8 @@
         "Tools": "Figma, Adobe Illustrator, ChatGPT, Canva"
       },
       "vision": "To make banking easier for small businesses by being their growth partner, their catalyst to success.",
-      "mission": "To become a leader in business banking for entrepreneurs by delivering reliable financial support and connectivity to technology."
+      "mission": "To become a leader in business banking for entrepreneurs by delivering reliable financial support and connectivity to technology.",
+      "cat": "brand product"
     },
     {
       "slug": "mau-jewels",
@@ -245,7 +265,8 @@
       "intro": "A brand identity for customers who love expressing themselves through jewellery, inspiring confidence and celebrating womanhood from product to visual identity.",
       "meta": {
         "Tools": "Adobe Illustrator, ChatGPT, Canva"
-      }
+      },
+      "cat": "brand"
     },
     {
       "slug": "sticks-and-wicks",
@@ -261,7 +282,8 @@
       "intro": "A fun but premium identity for environmentally conscious, aesthetic customers. The hand-drawn '&' joins the S and W and echoes the fumes of a candle wick.",
       "meta": {
         "Tools": "Adobe Illustrator, Nano Banana Pro, Claude Sonnet 4.5, Canva"
-      }
+      },
+      "cat": "brand"
     }
   ],
   "blog": [
@@ -329,5 +351,27 @@
         "text": "I experiment with AI for fun too: weird prompts, small tools, happy accidents."
       }
     ]
-  }
+  },
+  "categories": [
+    {
+      "id": "research",
+      "label": "UX research"
+    },
+    {
+      "id": "brand",
+      "label": "Brand identity"
+    },
+    {
+      "id": "ai",
+      "label": "AI experiments"
+    },
+    {
+      "id": "product",
+      "label": "Product design"
+    },
+    {
+      "id": "art",
+      "label": "Illustrations & art"
+    }
+  ]
 }

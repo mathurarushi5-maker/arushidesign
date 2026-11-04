@@ -48,8 +48,8 @@ def nav(active=""):
     return f"""<nav class="pill" aria-label="Main">
   <a class="dot" href="/" aria-label="Home"></a>
   {a('/#work', 'Work', 'work')}
-  {a('/#about', 'About', 'about')}
-  {a('/#life', 'Me', 'life')}
+  {a('/#about', 'Journey', 'about')}
+  {a('/#life', 'Off the clock', 'life')}
   {a('/#blog', 'Blog', 'blog')}
   {a('/#contact', 'Contact', 'contact')}
 </nav>"""
@@ -149,9 +149,10 @@ def thumb(p):
     inner = ""
     if t["type"] == "device":
         fl = t["floats"]
+        sattr = f' data-fit style="background:{t["sbg"]}"' if t.get("sbg") else ""
         main = (f'<div class="t photo"><img src="/assets/img/{t["main"]}" alt="{e(p["title"])} main image" loading="lazy"></div>'
                 if t.get("plain") else
-                f'<div class="laptop"><div class="screen"><img src="/assets/img/{t["main"]}" alt="{e(p["title"])} main screen" loading="lazy"></div>'
+                f'<div class="laptop"><div class="screen"{sattr}><img src="/assets/img/{t["main"]}" alt="{e(p["title"])} main screen" loading="lazy"></div>'
             '<div class="base"></div></div>')
         inner = (
             main
@@ -164,7 +165,7 @@ def thumb(p):
     else:
         a, b, c = t["imgs"]
         inner = img(a, "c1", -5, p["title"]) + img(b, "c2", 6) + img(c, "c3", -2)
-    return (f'<div class="work-art stage {t["type"]}{" cut" if t.get("cut") else ""}" data-tilt style="--stage:{t["stage"]}" '
+    return (f'<div class="work-art stage {t["type"]} s-{p["slug"]}{" cut" if t.get("cut") else ""}" data-tilt style="--stage:{t["stage"]}" '
             f'role="img" aria-label="{e(p["title"])} preview">{inner}</div>')
 
 
@@ -187,27 +188,12 @@ def index():
         <small>{e(priv['kind'])}</small>
       </div>
     </a>"""]
-    for i, p in enumerate(featured, start=1):
-        flip = " flip" if i % 2 else ""
-        tags = "".join(f"<li>{e(t)}</li>" for t in p["tags"])
-        cards.append(f"""
-    <a class="work reveal{flip}" href="/{p['slug']}/" style="--tint:{p['color']}">
-      <div class="work-text">
-        <h3>{e(p['title'])}</h3>
-        <p>{e(p['summary'])}</p>
-        <ul class="tags">{tags}</ul>
-        <span class="more">View case study <i>→</i></span>
-      </div>
-      {thumb(p)}
-    </a>""")
-
-    more_rows = "".join(f"""
-      <a class="more-row reveal" href="/{p['slug']}/" style="--tint:{p['color']}">
-        <img src="/assets/img/{p['cover']}" alt="" loading="lazy">
-        <h3>{e(p['title'])}</h3>
-        <span>{e(p['kind'])}</span>
-        <i>→</i>
-      </a>""" for p in more)
+    grid = "".join(f"""
+      <a class="tile reveal" data-cat="{p['cat']}" href="/{p['slug']}/" style="--tint:{p['color']}">
+        {thumb(p)}
+        <div class="tile-info"><h3>{e(p['title'])}</h3><p>{e(p['kind'])}</p><i>→</i></div>
+      </a>""" for p in featured + more)
+    cards.append(f'<div class="grid">{grid}<p class="empty" hidden>Coming soon — illustrations &amp; art are on the way.</p></div>')
 
     exp = "".join(f"""
       <li class="reveal">
@@ -217,6 +203,7 @@ def index():
         <span class="where">{e(x['where'])}</span>
       </li>""" for x in experience)
 
+    chips = "".join(f'<button class="chip" data-filter="{c["id"]}">{e(c["label"])}</button>' for c in data["categories"])
     marquee_words = ["Product design", "Brand identity", "Research", "Design systems", "AI experiences", "Strategy"]
     marquee = "".join(f"<span>{w}</span><b>✺</b>" for w in marquee_words) * 2
     email = f'<a class="big-link" href="mailto:{e(site["email"])}">{e(site["email"])}</a>' if site["email"] else ""
@@ -242,11 +229,8 @@ def index():
 
   <section id="work" class="section">
     <div class="sec-head reveal"><h2>Selected <em>work</em></h2><span class="note n2">recent favourites</span></div>
+    <div class="filters reveal" role="group" aria-label="Filter projects"><button class="chip on" data-filter="all">All</button>{chips}</div>
     <div class="works">{''.join(cards)}
-    </div>
-    <div class="more-work">
-      <h3 class="reveal">More <em>work</em></h3>
-      {more_rows}
     </div>
   </section>
 
