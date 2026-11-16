@@ -8,9 +8,10 @@
 <meta property="og:title" content="Arushi — Product Designer">
 <meta property="og:description" content="Product designer who cares about outcomes, not just outputs.">
 <meta property="og:image" content="/assets/img/tactilebrush/01.webp">
+<script>try{var t=localStorage.getItem("theme");if(t&&t!=="cream")document.documentElement.dataset.theme=t}catch(e){}</script>
 <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Inter:wght@400;500;600&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/css/style.css?v=1793820731">
+<link rel="stylesheet" href="/assets/css/style.css?v=1794855815">
 </head>
 <body>
 <div class="grain"></div>
@@ -22,6 +23,17 @@
   <a href="/#blog">Blog</a>
   <a href="/#contact">Contact</a>
 </nav>
+<div class="themer" data-themer>
+  <button class="themer-btn" aria-label="Change theme" aria-expanded="false" aria-haspopup="true"><span></span></button>
+  <div class="themer-menu" role="menu" hidden>
+    <button role="menuitem" data-set-theme="cream" title="Cream"><i style="--a:#f6f1e7;--b:#1f2bff"></i>Cream</button>
+    <button role="menuitem" data-set-theme="midnight" title="Midnight"><i style="--a:#14131c;--b:#7c85ff"></i>Midnight</button>
+    <button role="menuitem" data-set-theme="sunset" title="Sunset"><i style="--a:#fff1e6;--b:#e4442b"></i>Sunset</button>
+    <button role="menuitem" data-set-theme="mint" title="Mint"><i style="--a:#eaf6ee;--b:#0e7a5a"></i>Mint</button>
+    <button role="menuitem" data-set-theme="lilac" title="Lilac"><i style="--a:#f1ecff;--b:#6a3df5"></i>Lilac</button>
+    <button role="menuitem" data-set-theme="mono" title="Noir"><i style="--a:#fff;--b:#000"></i>Noir</button>
+  </div>
+</div>
 <main>
   <header class="hero" id="top">
     <div class="note n1">hi, I'm Arushi <svg viewBox="0 0 80 40"><path d="M2 8 C30 2 60 12 74 32 M74 32 l-10 -2 M74 32 l-3 -10"/></svg></div>
@@ -85,48 +97,75 @@
     <div class="about-in">
       <span class="note n3">a bit about me</span>
       <p class="about-big reveal">Bank-teller turned risk analyst turned <em>designer</em>. I don't believe in labels. I believe in <em>recognition</em> for the work I do, and in figuring out what people need.</p>
-      <ul class="exp">
+      <div class="exp-wrap"><svg class="exp-line" viewBox="0 0 1000 600" preserveAspectRatio="none" aria-hidden="true"><path d="M70,470 C130,470 140,330 205,330 C250,330 262,372 290,390 C325,405 340,372 318,350 C294,328 258,342 266,370 C274,396 318,408 338,440 C350,458 365,450 380,420 C405,365 440,295 485,295 C540,295 545,415 600,415 C655,415 670,285 725,285 C780,285 785,440 835,440 C875,440 905,425 895,392 C886,360 846,352 846,380 C846,408 888,392 906,350 C920,315 928,230 925,160" vector-effect="non-scaling-stroke"/></svg>
+      <ul class="exp" data-v="path">
       <li class="reveal">
+        <i class="pin" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2M3 13h18"/></svg></i>
         <span class="when">Mar 2026 — Now</span>
-        <div><h4>Product Designer (UX/UI) <em>· Adobe</em></h4>
+        <div><span class="when2">Mar 2026 — Now</span><h4>Product Designer (UX/UI) <em>· Adobe</em></h4>
+        <span class="loc">🇮🇳 India</span>
         <p>Sole designer on Sales Qualifier, an AI-powered B2B sales assistant: 30+ features in 4 months across SDR workflows, AI reply management and onboarding. Cut the backlog 40%, lifted onboarding bookings 35% and won the Gen AI Hackathon 2026.</p></div>
         <span class="where">India</span>
       </li>
       <li class="reveal">
+        <i class="pin" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2M3 13h18"/></svg></i>
         <span class="when">Jan 2024 — Nov 2025</span>
-        <div><h4>UX/UI Designer <em>· Freelance</em></h4>
+        <div><span class="when2">Jan 2024 — Nov 2025</span><h4>UX/UI Designer <em>· Freelance</em></h4>
+        <span class="loc">🌐 Remote</span>
         <p>Designed a 0-to-1 customer acquisition platform across 15+ sprint releases, built a scalable design system and tested with 200+ users to lift engagement 40%.</p></div>
         <span class="where">Remote</span>
       </li>
       <li class="reveal">
+        <i class="pin" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2M3 13h18"/></svg></i>
         <span class="when">Mar 2023 — Dec 2023</span>
-        <div><h4>Product Specialist, Digital Assets <em>· Lloyds Banking Group</em></h4>
+        <div><span class="when2">Mar 2023 — Dec 2023</span><h4>Product Specialist, Digital Assets <em>· Lloyds Banking Group</em></h4>
+        <span class="loc">🇬🇧 London, UK</span>
         <p>Owned interaction design across 225+ digital touchpoints, ran 30+ A/B tests and drove £400K pipeline growth. Mentored content designers and junior analysts.</p></div>
         <span class="where">London</span>
       </li>
       <li class="reveal">
+        <i class="pin" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2M3 13h18"/></svg></i>
         <span class="when">May 2022 — Mar 2023</span>
-        <div><h4>Product Analyst, Credit Risk <em>· Lloyds Banking Group (Blackhorse)</em></h4>
+        <div><span class="when2">May 2022 — Mar 2023</span><h4>Product Analyst, Credit Risk <em>· Lloyds Banking Group (Blackhorse)</em></h4>
+        <span class="loc">🇬🇧 Cardiff, UK</span>
         <p>Cut credit decisioning time 22% through API-led platform requirements and built SQL and Power BI dashboards that raised stakeholder adoption 14%.</p></div>
         <span class="where">Cardiff</span>
       </li>
       <li class="reveal">
+        <i class="pin" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2M3 13h18"/></svg></i>
         <span class="when">Nov 2021 — May 2022</span>
-        <div><h4>Customer Experience Specialist <em>· Lloyds Banking Group</em></h4>
+        <div><span class="when2">Nov 2021 — May 2022</span><h4>Customer Experience Specialist <em>· Lloyds Banking Group</em></h4>
+        <span class="loc">🇬🇧 London, UK</span>
         <p>Cut delivery cycle time 30% with rapid iteration and experimentation, and lifted digital adoption 14% by optimising journeys and onboarding content.</p></div>
         <span class="where">London</span>
       </li>
       <li class="reveal">
+        <i class="pin" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 9l10-5 10 5-10 5z"/><path d="M6 11.5V16c0 1.5 3 3 6 3s6-1.500 6-3v-4.500M22 9v6"/></svg></i>
+        <span class="when">2021</span>
+        <div><span class="when2">2021</span><h4>MSc Banking and Finance <em>· Queen Mary University of London</em></h4>
+        <span class="loc">🇬🇧 London, UK</span>
+        <p>Graduated with Distinction.</p></div>
+        <span class="where">London</span>
+      </li>
+      <li class="reveal">
+        <i class="pin" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2M3 13h18"/></svg></i>
         <span class="when">Aug 2017 — Mar 2020</span>
-        <div><h4>Customer Operations Analyst <em>· Punjab National Bank</em></h4>
+        <div><span class="when2">Aug 2017 — Mar 2020</span><h4>Customer Operations Analyst <em>· Punjab National Bank</em></h4>
+        <span class="loc">🇮🇳 India</span>
         <p>Grew an INR 250 crore portfolio from 8,000 to 25,000 accounts and led the 0-to-1 launch of PNB One, reaching 4,000+ users in Q1.</p></div>
         <span class="where">India</span>
       </li>
-      </ul>
+      <li class="reveal">
+        <i class="pin" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 9l10-5 10 5-10 5z"/><path d="M6 11.5V16c0 1.5 3 3 6 3s6-1.500 6-3v-4.500M22 9v6"/></svg></i>
+        <span class="when">2015</span>
+        <div><span class="when2">2015</span><h4>Master of Commerce <em>· University of Lucknow</em></h4>
+        <span class="loc">🇮🇳 Lucknow, India</span>
+        <p>Graduated as a Gold Medalist.</p></div>
+        <span class="where">India</span>
+      </li>
+      </ul></div>
     </div>
     <div class="sticker a1" data-drag><span>ex-bank<br>teller</span></div>
-    <div class="sticker a2" data-drag><span>risk<br>analyst</span></div>
-    <div class="sticker a3" data-drag aria-hidden="true">✦</div>
     <div class="sticker a4" data-drag><span>now:<br>designer</span></div>
   </section>
 
@@ -141,7 +180,7 @@
   </section>
 
   <section id="blog" class="section blog">
-    <div class="sec-head reveal"><h2>Notes &amp; <em>writing</em></h2><span class="note n2">on design, fintech &amp; AI</span></div>
+    <div class="sec-head reveal"><h2>Blog &amp; <em>writing</em></h2><span class="note n2">on design, fintech &amp; AI</span></div>
     <div class="posts"><a class="post reveal" href="https://www.arushidesign.com/post/from-research-to-executive-presentation-my-ai-powered-design-workflow" target="_blank" rel="noopener"><h3 title="From Research to Executive Presentation: My AI-Powered Design Workflow">From Research to Executive…</h3><span class="tag">Jun 2026</span><svg class="art" viewBox="0 0 120 100" fill="none" stroke="#16150f" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="14" y="16" width="84" height="58" rx="8" fill="#fff"/><path d="M26 58l16-16 12 10 20-24" fill="none"/><circle cx="74" cy="28" r="3" fill="#c8f560"/><path d="M56 74v14M40 90h32"/><path d="M98 10l3 9 9 3-9 3-3 9-3-9-9-3 9-3z" fill="#c8f560"/></svg></a><a class="post reveal" href="https://www.arushidesign.com/post/how-generative-ai-changed-my-design-process-without-replacing-design-thinking" target="_blank" rel="noopener"><h3 title="How Generative AI Changed My Design Process (Without Replacing Design Thinking)">How Generative AI Changed…</h3><span class="tag">Jun 2026</span><svg class="art" viewBox="0 0 120 100" fill="none" stroke="#16150f" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 78C30 30 70 100 100 36" fill="none"/><circle cx="14" cy="78" r="6" fill="#fff"/><circle cx="100" cy="36" r="6" fill="#c8f560"/><path d="M14 78L34 46M100 36L84 70" stroke-dasharray="3 6"/><rect x="31" y="42" width="8" height="8" rx="2" fill="#ffb4a2"/><rect x="80" y="66" width="8" height="8" rx="2" fill="#ffb4a2"/><path d="M60 10l3 8 8 3-8 3-3 8-3-8-8-3 8-3z" fill="#c8f560"/></svg></a><a class="post reveal" href="https://www.arushidesign.com/post/mobile-first-banking-design-principles-that-convert" target="_blank" rel="noopener"><h3 title="Mobile-First Banking: Design Principles That Convert">Mobile-First Banking: Design…</h3><span class="tag">Nov 2025</span><svg class="art" viewBox="0 0 120 100" fill="none" stroke="#16150f" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="34" y="8" width="52" height="86" rx="12" fill="#fff"/><path d="M52 16h16"/><rect x="42" y="34" width="36" height="24" rx="5" fill="#ffb4a2"/><path d="M42 42h36"/><path d="M44 70h32M44 80h20"/><circle cx="94" cy="30" r="12" fill="#c8f560"/><path d="M94 25v10M90 28h6"/></svg></a><a class="post reveal" href="https://www.arushidesign.com/post/in-a-crowded-market-design-becomes-the-differentiator" target="_blank" rel="noopener"><h3 title="In a Crowded Market, Design Becomes the Differentiator">In a Crowded Market,…</h3><span class="tag">Nov 2025</span><svg class="art" viewBox="0 0 120 100" fill="none" stroke="#16150f" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M36 36h48l14 18-38 36L22 54z" fill="#c8f560"/><path d="M22 54h76M46 36l-8 18 22 36 22-36-8-18M50 36l10 18 10-18"/><path d="M100 14l2 7 7 2-7 2-2 7-2-7-7-2 7-2zM14 24l2 5 5 2-5 2-2 5-2-5-5-2 5-2z" fill="#ffb4a2"/></svg></a><a class="post reveal" href="https://www.arushidesign.com/post/from-transferwise-to-wise-a-masterclass-in-global-rebranding" target="_blank" rel="noopener"><h3 title="From TransferWise to Wise: A Masterclass in Global Rebranding">From TransferWise to Wise:…</h3><span class="tag">Oct 2025</span><svg class="art" viewBox="0 0 120 100" fill="none" stroke="#16150f" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 80C30 80 40 50 62 54" stroke-dasharray="2 7"/><path d="M104 18L18 50l30 10 10 30z" fill="#fff"/><path d="M104 18L48 60l10 30 14-22z" fill="#c8f560"/><circle cx="14" cy="80" r="5" fill="#ffb4a2"/></svg></a><a class="post reveal" href="https://www.arushidesign.com/post/revolut-brand-evolution" target="_blank" rel="noopener"><h3 title="Revolut&#x27;s Fintech Brand Evolution: Old vs. New Design">Revolut&#x27;s Fintech Brand Evolution:…</h3><span class="tag">Oct 2025</span><svg class="art" viewBox="0 0 120 100" fill="none" stroke="#16150f" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="14" y="30" width="72" height="48" rx="12" fill="#fff"/><path d="M14 46h72"/><path d="M26 64h20" /><circle cx="70" cy="64" r="6" fill="#ffb4a2"/><path d="M110 12l-4-4-34 34-4 14 14-4z" fill="#c8f560"/><path d="M72 52l8 8"/></svg></a></div>
   </section>
 
@@ -155,6 +194,6 @@
   </section>
 </main>
 <footer><span>© 2026 Arushi</span><span>Designed &amp; built by hand</span></footer>
-<script src="/assets/js/main.js?v=1793820731" defer></script>
+<script src="/assets/js/main.js?v=1794855815" defer></script>
 </body>
 </html>
