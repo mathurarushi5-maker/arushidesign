@@ -114,3 +114,22 @@ const applyFilter = (f) => {
   if (em) em.hidden = n > 0;
 };
 chips.forEach((c) => c.addEventListener("click", () => applyFilter(c.dataset.filter)));
+
+const themer = document.querySelector("[data-themer]");
+if (themer) {
+  const btn = themer.querySelector(".themer-btn");
+  const menu = themer.querySelector(".themer-menu");
+  const items = [...menu.querySelectorAll("[data-set-theme]")];
+  const mark = () => items.forEach((i) => i.classList.toggle("on", i.dataset.setTheme === (document.documentElement.dataset.theme || "cream")));
+  const toggle = (open) => { menu.hidden = !open; btn.setAttribute("aria-expanded", open); };
+  btn.addEventListener("click", (e) => { e.stopPropagation(); toggle(menu.hidden); });
+  items.forEach((i) => i.addEventListener("click", () => {
+    const t = i.dataset.setTheme;
+    if (t === "cream") delete document.documentElement.dataset.theme; else document.documentElement.dataset.theme = t;
+    try { localStorage.setItem("theme", t); } catch (e) {}
+    mark(); toggle(false);
+  }));
+  document.addEventListener("click", (e) => { if (!themer.contains(e.target)) toggle(false); });
+  document.addEventListener("keydown", (e) => { if (e.key === "Escape") toggle(false); });
+  mark();
+}

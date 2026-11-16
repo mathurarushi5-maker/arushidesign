@@ -97,42 +97,74 @@
       "role": "Product Designer (UX/UI)",
       "org": "Adobe",
       "where": "India",
-      "desc": "Sole designer on Sales Qualifier, an AI-powered B2B sales assistant: 30+ features in 4 months across SDR workflows, AI reply management and onboarding. Cut the backlog 40%, lifted onboarding bookings 35% and won the Gen AI Hackathon 2026."
+      "desc": "Sole designer on Sales Qualifier, an AI-powered B2B sales assistant: 30+ features in 4 months across SDR workflows, AI reply management and onboarding. Cut the backlog 40%, lifted onboarding bookings 35% and won the Gen AI Hackathon 2026.",
+      "flag": "🇮🇳",
+      "loc": "India"
     },
     {
       "when": "Jan 2024 — Nov 2025",
       "role": "UX/UI Designer",
       "org": "Freelance",
       "where": "Remote",
-      "desc": "Designed a 0-to-1 customer acquisition platform across 15+ sprint releases, built a scalable design system and tested with 200+ users to lift engagement 40%."
+      "desc": "Designed a 0-to-1 customer acquisition platform across 15+ sprint releases, built a scalable design system and tested with 200+ users to lift engagement 40%.",
+      "flag": "🌐",
+      "loc": "Remote"
     },
     {
       "when": "Mar 2023 — Dec 2023",
       "role": "Product Specialist, Digital Assets",
       "org": "Lloyds Banking Group",
       "where": "London",
-      "desc": "Owned interaction design across 225+ digital touchpoints, ran 30+ A/B tests and drove £400K pipeline growth. Mentored content designers and junior analysts."
+      "desc": "Owned interaction design across 225+ digital touchpoints, ran 30+ A/B tests and drove £400K pipeline growth. Mentored content designers and junior analysts.",
+      "flag": "🇬🇧",
+      "loc": "London, UK"
     },
     {
       "when": "May 2022 — Mar 2023",
       "role": "Product Analyst, Credit Risk",
       "org": "Lloyds Banking Group (Blackhorse)",
       "where": "Cardiff",
-      "desc": "Cut credit decisioning time 22% through API-led platform requirements and built SQL and Power BI dashboards that raised stakeholder adoption 14%."
+      "desc": "Cut credit decisioning time 22% through API-led platform requirements and built SQL and Power BI dashboards that raised stakeholder adoption 14%.",
+      "flag": "🇬🇧",
+      "loc": "Cardiff, UK"
     },
     {
       "when": "Nov 2021 — May 2022",
       "role": "Customer Experience Specialist",
       "org": "Lloyds Banking Group",
       "where": "London",
-      "desc": "Cut delivery cycle time 30% with rapid iteration and experimentation, and lifted digital adoption 14% by optimising journeys and onboarding content."
+      "desc": "Cut delivery cycle time 30% with rapid iteration and experimentation, and lifted digital adoption 14% by optimising journeys and onboarding content.",
+      "flag": "🇬🇧",
+      "loc": "London, UK"
+    },
+    {
+      "when": "2021",
+      "role": "MSc Banking and Finance",
+      "org": "Queen Mary University of London",
+      "where": "London",
+      "desc": "Graduated with Distinction.",
+      "icon": "grad",
+      "flag": "🇬🇧",
+      "loc": "London, UK"
     },
     {
       "when": "Aug 2017 — Mar 2020",
       "role": "Customer Operations Analyst",
       "org": "Punjab National Bank",
       "where": "India",
-      "desc": "Grew an INR 250 crore portfolio from 8,000 to 25,000 accounts and led the 0-to-1 launch of PNB One, reaching 4,000+ users in Q1."
+      "desc": "Grew an INR 250 crore portfolio from 8,000 to 25,000 accounts and led the 0-to-1 launch of PNB One, reaching 4,000+ users in Q1.",
+      "flag": "🇮🇳",
+      "loc": "India"
+    },
+    {
+      "when": "2015",
+      "role": "Master of Commerce",
+      "org": "University of Lucknow",
+      "where": "India",
+      "desc": "Graduated as a Gold Medalist.",
+      "icon": "grad",
+      "flag": "🇮🇳",
+      "loc": "Lucknow, India"
     }
   ],
   "projects": [
