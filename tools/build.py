@@ -35,7 +35,7 @@ def head(title, desc, og_image=None):
 <meta property="og:description" content="{e(desc)}">
 {og}
 <script>try{{var t=localStorage.getItem("theme");if(t&&t!=="cream")document.documentElement.dataset.theme=t}}catch(e){{}}</script>
-<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/assets/favicon.png" type="image/png">
 {FONTS}
 <link rel="stylesheet" href="/assets/css/style.css?v={ASSET_V}">
 </head>"""
@@ -54,16 +54,14 @@ def nav(active=""):
   {a('/#blog', 'Blog', 'blog')}
   {a('/#contact', 'Contact', 'contact')}
 </nav>
-<div class="themer" data-themer>
-  <button class="themer-btn" aria-label="Change theme" aria-expanded="false" aria-haspopup="true"><span></span></button>
-  <div class="themer-menu" role="menu" hidden>
-    <button role="menuitem" data-set-theme="cream" title="Cream"><i style="--a:#f6f1e7;--b:#1f2bff"></i>Cream</button>
-    <button role="menuitem" data-set-theme="midnight" title="Midnight"><i style="--a:#14131c;--b:#7c85ff"></i>Midnight</button>
-    <button role="menuitem" data-set-theme="sunset" title="Sunset"><i style="--a:#fff1e6;--b:#e4442b"></i>Sunset</button>
-    <button role="menuitem" data-set-theme="mint" title="Mint"><i style="--a:#eaf6ee;--b:#0e7a5a"></i>Mint</button>
-    <button role="menuitem" data-set-theme="lilac" title="Lilac"><i style="--a:#f1ecff;--b:#6a3df5"></i>Lilac</button>
-    <button role="menuitem" data-set-theme="mono" title="Noir"><i style="--a:#fff;--b:#000"></i>Noir</button>
-  </div>
+<div class="themer" data-themer role="group" aria-label="Pick your vibe">
+  <span class="themer-label">pick your vibe</span>
+  <button data-set-theme="cream" aria-label="Cream theme" data-name="Cream" style="--a:#f6f1e7;--b:#1f2bff"></button>
+  <button data-set-theme="midnight" aria-label="Midnight theme" data-name="Midnight" style="--a:#14131c;--b:#7c85ff"></button>
+  <button data-set-theme="sunset" aria-label="Sunset theme" data-name="Sunset" style="--a:#fff1e6;--b:#e4442b"></button>
+  <button data-set-theme="mint" aria-label="Mint theme" data-name="Mint" style="--a:#eaf6ee;--b:#0e7a5a"></button>
+  <button data-set-theme="lilac" aria-label="Lilac theme" data-name="Lilac" style="--a:#f1ecff;--b:#6a3df5"></button>
+  <button data-set-theme="mono" aria-label="Noir theme" data-name="Noir" style="--a:#fff;--b:#000"></button>
 </div>"""
 
 
@@ -212,7 +210,7 @@ def index():
       "grad": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 9l10-5 10 5-10 5z"/><path d="M6 11.5V16c0 1.5 3 3 6 3s6-1.500 6-3v-4.500M22 9v6"/></svg>',
     }
     exp = "".join(f"""
-      <li class="reveal">
+      <li>
         <i class="pin" aria-hidden="true">{PINS.get(x.get('icon','work'))}</i>
         <span class="when">{e(x['when'])}</span>
         <div><span class="when2">{e(x['when'])}</span><h4>{e(x['role'])} <em>· {e(x['org'])}</em></h4>
@@ -255,11 +253,12 @@ def index():
   <section id="about" class="about">
     <div class="about-in">
       <span class="note n3">a bit about me</span>
-      <p class="about-big reveal">Bank-teller turned risk analyst turned <em>designer</em>. I don't believe in labels. I believe in <em>recognition</em> for the work I do, and in figuring out what people need.</p>
-      <div class="exp-wrap"><svg class="exp-line" viewBox="0 0 1000 600" preserveAspectRatio="none" aria-hidden="true"><path d="M70,470 C130,470 140,330 205,330 C250,330 262,372 290,390 C325,405 340,372 318,350 C294,328 258,342 266,370 C274,396 318,408 338,440 C350,458 365,450 380,420 C405,365 440,295 485,295 C540,295 545,415 600,415 C655,415 670,285 725,285 C780,285 785,440 835,440 C875,440 905,425 895,392 C886,360 846,352 846,380 C846,408 888,392 906,350 C920,315 928,230 925,160" vector-effect="non-scaling-stroke"/></svg>
+      <p class="about-big reveal">Bank-teller turned risk analyst turned <em>designer</em>. I don't believe in labels. I believe in <em>recognition</em> for the work I do, and in figuring out what people <span class="need">need.</span></p>
+      <div class="exp-wrap"><svg class="exp-line" viewBox="0 0 1000 600" preserveAspectRatio="none" aria-hidden="true"><defs><mask id="trail" maskUnits="userSpaceOnUse" x="0" y="0" width="1000" height="600"><path class="trail-mask" pathLength="1000" d="M70,470 C130,470 140,330 205,330 C250,330 262,372 290,390 C325,405 340,372 318,350 C294,328 258,342 266,370 C274,396 318,408 338,440 C350,458 365,450 380,420 C405,365 440,295 485,295 C540,295 545,415 600,415 C655,415 670,285 725,285 C780,285 785,440 835,440 C875,440 905,425 895,392 C886,360 846,352 846,380 C846,408 888,392 906,350 C920,315 928,230 925,160" fill="none" stroke="#fff" stroke-width="28" stroke-linecap="round"/></mask></defs><path class="trail-path" mask="url(#trail)" d="M70,470 C130,470 140,330 205,330 C250,330 262,372 290,390 C325,405 340,372 318,350 C294,328 258,342 266,370 C274,396 318,408 338,440 C350,458 365,450 380,420 C405,365 440,295 485,295 C540,295 545,415 600,415 C655,415 670,285 725,285 C780,285 785,440 835,440 C875,440 905,425 895,392 C886,360 846,352 846,380 C846,408 888,392 906,350 C920,315 928,230 925,160" vector-effect="non-scaling-stroke"/></svg>
       <ul class="exp" data-v="path">{exp}
       </ul></div>
     </div>
+    <div class="bfly" aria-hidden="true"><svg viewBox="0 0 100 80"><g class="wl"><g class="wing"><path d="M43 36C38 8 12 2 6 16C2 30 20 42 43 40Z"/><path d="M43 46C28 46 14 56 18 68C22 78 40 70 43 54Z"/></g></g><g class="wr" transform="translate(100 0) scale(-1 1)"><g class="wing"><path d="M43 36C38 8 12 2 6 16C2 30 20 42 43 40Z"/><path d="M43 46C28 46 14 56 18 68C22 78 40 70 43 54Z"/></g></g><rect class="body" x="46" y="24" width="8" height="46" rx="4"/><path class="ant" d="M47 24C44 14 40 10 35 9M53 24C56 14 60 10 65 9"/></svg></div>
     <div class="sticker a1" data-drag><span>ex-bank<br>teller</span></div>
     <div class="sticker a4" data-drag><span>now:<br>designer</span></div>
   </section>

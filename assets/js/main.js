@@ -117,19 +117,98 @@ chips.forEach((c) => c.addEventListener("click", () => applyFilter(c.dataset.fil
 
 const themer = document.querySelector("[data-themer]");
 if (themer) {
-  const btn = themer.querySelector(".themer-btn");
-  const menu = themer.querySelector(".themer-menu");
-  const items = [...menu.querySelectorAll("[data-set-theme]")];
-  const mark = () => items.forEach((i) => i.classList.toggle("on", i.dataset.setTheme === (document.documentElement.dataset.theme || "cream")));
-  const toggle = (open) => { menu.hidden = !open; btn.setAttribute("aria-expanded", open); };
-  btn.addEventListener("click", (e) => { e.stopPropagation(); toggle(menu.hidden); });
-  items.forEach((i) => i.addEventListener("click", () => {
+  const root = document.documentElement;
+  const items = [...themer.querySelectorAll("[data-set-theme]")];
+  const apply = (t) => { if (t === "cream") delete root.dataset.theme; else root.dataset.theme = t; };
+  const cur = () => root.dataset.theme || "cream";
+  let saved = cur();
+  const mark = () => items.forEach((i) => i.classList.toggle("on", i.dataset.setTheme === saved));
+  items.forEach((i) => {
     const t = i.dataset.setTheme;
-    if (t === "cream") delete document.documentElement.dataset.theme; else document.documentElement.dataset.theme = t;
-    try { localStorage.setItem("theme", t); } catch (e) {}
-    mark(); toggle(false);
-  }));
-  document.addEventListener("click", (e) => { if (!themer.contains(e.target)) toggle(false); });
-  document.addEventListener("keydown", (e) => { if (e.key === "Escape") toggle(false); });
+    i.addEventListener("mouseenter", () => apply(t));
+    i.addEventListener("mouseleave", () => apply(saved));
+    i.addEventListener("click", () => {
+      saved = t; apply(t); mark();
+      try { localStorage.setItem("theme", t); } catch (e) {}
+    });
+  });
   mark();
 }
+
+// journey butterfly: scroll-driven trail
+(() => {
+  const wrap = document.querySelector(".exp-wrap");
+  const bfly = document.querySelector(".bfly");
+  const need = document.querySelector(".need");
+  const about = document.querySelector(".about");
+  const svg = wrap && wrap.querySelector(".exp-line");
+  const path = svg && svg.querySelector(".trail-path");
+  const mask = svg && svg.querySelector(".trail-mask");
+  if (!bfly || !need || !path || matchMedia("(max-width: 860px)").matches) return;
+  const lis = [...wrap.querySelectorAll(".exp li")].reverse();
+  const total = path.getTotalLength();
+  const N = 1600, pts = [];
+  for (let i = 0; i <= N; i++) { const q = path.getPointAtLength((total * i) / N); pts.push([q.x, q.y]); }
+  let prev = 0;
+  const stops = lis.map((li) => {
+    const x = parseFloat(li.style.left) || (li.offsetLeft / wrap.offsetWidth) * 1000;
+    const y = parseFloat(li.style.top) || (li.offsetTop / wrap.offsetHeight) * 600;
+    let best = prev, bd = Infinity;
+    for (let i = prev; i <= N; i++) { const d = (pts[i][0] - x) ** 2 + (pts[i][1] - y) ** 2; if (d < bd) { bd = d; best = i; } }
+    prev = best;
+    return best / N;
+  });
+  window.__bf = () => ({ prog, stops, total, n: lis.length });
+  wrap.classList.add("anim");
+  mask.style.strokeDasharray = "1000";
+  const clamp = (v) => Math.max(0, Math.min(1, v));
+  const ease = (t) => t * t * (3 - 2 * t);
+  let flyT, prog = reduce ? 1 : 0, playing = false, t0 = 0;
+  const DUR = 7000;
+  const frame = () => {
+    const vh = innerHeight, r = wrap.getBoundingClientRect();
+    const s = prog;
+    const pf = clamp(s / 0.8), ff = ease(clamp((s - 0.8) / 0.2));
+    mask.style.strokeDashoffset = String(1000 * (1 - pf));
+    lis.forEach((li, i) => li.classList.toggle("seen", pf >= stops[i] - 0.005));
+    const sr = svg.getBoundingClientRect(), ar = about.getBoundingClientRect();
+    const at = (f) => { const q = path.getPointAtLength(total * f); return [sr.left + (q.x / 1000) * sr.width, sr.top + (q.y / 600) * sr.height]; };
+    let [x, y] = at(pf);
+    const a = at(Math.max(0, pf - 0.01)), b = at(Math.min(1, pf + 0.01));
+    let tilt = Math.max(-25, Math.min(25, (Math.atan2(b[1] - a[1], b[0] - a[0]) * 180) / Math.PI * 0.35));
+    if (ff > 0) {
+      const nr = need.getBoundingClientRect();
+      const tx = nr.right + 46, ty = nr.top + nr.height * 0.45;
+      const cx = x, cy = ty;
+      const u = 1 - ff;
+      const nx = u * u * x + 2 * u * ff * cx + ff * ff * tx;
+      const ny = u * u * y + 2 * u * ff * cy + ff * ff * ty;
+      tilt = -14 * ff * u * 4 + 8 * ff;
+      x = nx; y = ny;
+    }
+    bfly.style.transform = `translate(${x - ar.left - 36}px, ${y - ar.top - 29}px) rotate(${tilt}deg)`;
+    bfly.classList.toggle("on", s > 0.001 || reduce);
+  };
+  const step = (now) => {
+    prog = clamp((now - t0) / DUR);
+    bfly.classList.add("fly"); clearTimeout(flyT);
+    frame();
+    if (prog < 1) requestAnimationFrame(step);
+    else { playing = false; bfly.classList.remove("fly"); }
+  };
+  const play = () => { if (playing || prog >= 1) return; playing = true; t0 = performance.now(); requestAnimationFrame(step); };
+  const watch = () => {
+    const r = wrap.getBoundingClientRect(), vh = innerHeight;
+    const vis = Math.min(r.bottom, vh) - Math.max(r.top, 0);
+    if (!reduce && vis > r.height * 0.7) play();
+    else if (!reduce && !playing && prog >= 1 && r.top > vh) { prog = 0; frame(); }
+  };
+  let tick = false;
+  const onScroll = () => {
+    watch();
+    if (!tick) { tick = true; requestAnimationFrame(() => { tick = false; frame(); }); }
+  };
+  addEventListener("scroll", onScroll, { passive: true });
+  addEventListener("resize", frame);
+  frame();
+})();

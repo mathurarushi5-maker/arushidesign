@@ -9,9 +9,9 @@
 <meta property="og:description" content="A quirky, minimal brand for homegrown soy candles inspired by seasonal fruit.">
 <meta property="og:image" content="/assets/img/sticks-and-wicks/01.webp">
 <script>try{var t=localStorage.getItem("theme");if(t&&t!=="cream")document.documentElement.dataset.theme=t}catch(e){}</script>
-<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/assets/favicon.png" type="image/png">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Inter:wght@400;500;600&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/css/style.css?v=1794855815">
+<link rel="stylesheet" href="/assets/css/style.css?v=1794938795">
 </head>
 <body class="case" style="--tint:#C9E5B0">
 <div class="grain"></div>
@@ -23,16 +23,14 @@
   <a href="/#blog">Blog</a>
   <a href="/#contact">Contact</a>
 </nav>
-<div class="themer" data-themer>
-  <button class="themer-btn" aria-label="Change theme" aria-expanded="false" aria-haspopup="true"><span></span></button>
-  <div class="themer-menu" role="menu" hidden>
-    <button role="menuitem" data-set-theme="cream" title="Cream"><i style="--a:#f6f1e7;--b:#1f2bff"></i>Cream</button>
-    <button role="menuitem" data-set-theme="midnight" title="Midnight"><i style="--a:#14131c;--b:#7c85ff"></i>Midnight</button>
-    <button role="menuitem" data-set-theme="sunset" title="Sunset"><i style="--a:#fff1e6;--b:#e4442b"></i>Sunset</button>
-    <button role="menuitem" data-set-theme="mint" title="Mint"><i style="--a:#eaf6ee;--b:#0e7a5a"></i>Mint</button>
-    <button role="menuitem" data-set-theme="lilac" title="Lilac"><i style="--a:#f1ecff;--b:#6a3df5"></i>Lilac</button>
-    <button role="menuitem" data-set-theme="mono" title="Noir"><i style="--a:#fff;--b:#000"></i>Noir</button>
-  </div>
+<div class="themer" data-themer role="group" aria-label="Pick your vibe">
+  <span class="themer-label">pick your vibe</span>
+  <button data-set-theme="cream" aria-label="Cream theme" data-name="Cream" style="--a:#f6f1e7;--b:#1f2bff"></button>
+  <button data-set-theme="midnight" aria-label="Midnight theme" data-name="Midnight" style="--a:#14131c;--b:#7c85ff"></button>
+  <button data-set-theme="sunset" aria-label="Sunset theme" data-name="Sunset" style="--a:#fff1e6;--b:#e4442b"></button>
+  <button data-set-theme="mint" aria-label="Mint theme" data-name="Mint" style="--a:#eaf6ee;--b:#0e7a5a"></button>
+  <button data-set-theme="lilac" aria-label="Lilac theme" data-name="Lilac" style="--a:#f1ecff;--b:#6a3df5"></button>
+  <button data-set-theme="mono" aria-label="Noir theme" data-name="Noir" style="--a:#fff;--b:#000"></button>
 </div>
 <main>
   <header class="case-hero">
@@ -53,6 +51,6 @@
 </main>
 <footer><span>© 2026 Arushi</span><span><a href="/#contact">Let's talk</a></span></footer>
 <div class="lightbox" hidden><img alt=""></div>
-<script src="/assets/js/main.js?v=1794855815" defer></script>
+<script src="/assets/js/main.js?v=1794938795" defer></script>
 </body>
 </html>
