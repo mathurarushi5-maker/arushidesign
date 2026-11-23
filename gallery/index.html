@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Paint &amp; pencil — Arushi</title>
+<meta name="description" content="Painting and sketching keep my hands busy and my eye sharp. A few pieces from the wall.">
+<meta property="og:title" content="Paint &amp; pencil — Arushi">
+<meta property="og:description" content="Painting and sketching keep my hands busy and my eye sharp. A few pieces from the wall.">
+
+<script>try{var t=localStorage.getItem("theme");if(t&&t!=="cream")document.documentElement.dataset.theme=t}catch(e){}</script>
+<link rel="icon" href="/assets/favicon.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Inter:wght@400;500;600&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/style.css?v=1795371819">
+</head>
+<body class="gl-page">
+<nav class="pill" aria-label="Main">
+  <a class="dot" href="/" aria-label="Home"></a>
+  <a href="/#work">Work</a>
+  <a href="/#about">Journey</a>
+  <a href="/#life" class="on">Off the clock</a>
+  <a href="/#blog">Blog</a>
+  <a href="/#contact">Contact</a>
+</nav>
+<div class="themer" data-themer role="group" aria-label="Pick your vibe">
+  <span class="themer-label">pick your vibe</span>
+  <button data-set-theme="cream" aria-label="Cream theme" data-name="Cream" style="--a:#f6f1e7;--b:#1f2bff"></button>
+  <button data-set-theme="midnight" aria-label="Midnight theme" data-name="Midnight" style="--a:#14131c;--b:#7c85ff"></button>
+  <button data-set-theme="sunset" aria-label="Sunset theme" data-name="Sunset" style="--a:#fff1e6;--b:#e4442b"></button>
+  <button data-set-theme="mint" aria-label="Mint theme" data-name="Mint" style="--a:#eaf6ee;--b:#0e7a5a"></button>
+  <button data-set-theme="lilac" aria-label="Lilac theme" data-name="Lilac" style="--a:#f1ecff;--b:#6a3df5"></button>
+  <button data-set-theme="mono" aria-label="Noir theme" data-name="Noir" style="--a:#fff;--b:#000"></button>
+</div>
+<main class="gl">
+  <header class="gl-head">
+    <a class="back" href="/#life">← Beyond the portfolio</a>
+    <div class="gl-title"><h1>Paint &amp; pencil</h1><span class="note n3">hands busy, eye sharp</span></div>
+    <p class="lede">Painting and sketching keep my hands busy and my eye sharp. A few pieces from the wall.</p>
+    <div class="gl-filters" role="group" aria-label="Filter">
+      <button class="on" data-f="all">All</button><button data-f="pencil">Pencil</button><button data-f="paint">Paint</button>
+      <span class="gl-count"><b id="glN">0</b> pieces</span>
+    </div>
+  </header>
+  <section class="gl-wall" id="glWall" aria-label="Art wall"></section>
+  <p class="gl-empty" hidden>The wall is being hung. Check back soon.</p>
+  <noscript><p>Please enable JavaScript to see the art.</p></noscript>
+  <div class="gl-admin" hidden>
+    <b>Edit mode</b> <span>Put image files in assets/art/, add them here, then export gallery.json and replace content/gallery.json. Changes show only in this browser until then.</span>
+    <form><input type="text" name="title" placeholder="Title" required><input type="text" name="image" placeholder="Image path, e.g. /assets/art/cat.jpg">
+    <select name="medium"><option value="pencil">Pencil</option><option value="paint">Paint</option></select>
+    <input type="text" name="year" placeholder="Year"><input type="text" name="note" placeholder="Short note (optional)">
+    <label><input type="checkbox" name="wip"> Work in progress</label><button>Add piece</button></form>
+    <div><button class="gl-export">Export gallery.json</button> <button class="gl-reset">Discard my edits</button></div>
+  </div>
+</main>
+<div class="gl-lb" id="glLb" hidden role="dialog" aria-modal="true" aria-label="Artwork">
+  <button class="gl-x" aria-label="Close">×</button><button class="gl-prev" aria-label="Previous">←</button><button class="gl-next" aria-label="Next">→</button>
+  <figure><div class="gl-img"></div><figcaption><h2></h2><p class="gl-meta"></p><p class="gl-note"></p><button class="gl-del" hidden>Remove this piece</button></figcaption></figure>
+</div>
+<footer><span>© 2026 Arushi</span><span><a href="/#life">Back to Off the clock</a></span></footer>
+<script src="/assets/js/main.js?v=1795371819" defer></script>
+<script>window.__ART=[];</script>
+<script src="/assets/js/gallery.js?v=1795371819" defer></script>
+</body>
+</html>

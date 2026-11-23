@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Poems — Arushi</title>
+<meta name="description" content="I write to make sense of things I can’t fit into a design brief. These are the finished ones.">
+<meta property="og:title" content="Poems — Arushi">
+<meta property="og:description" content="I write to make sense of things I can’t fit into a design brief. These are the finished ones.">
+
+<script>try{var t=localStorage.getItem("theme");if(t&&t!=="cream")document.documentElement.dataset.theme=t}catch(e){}</script>
+<link rel="icon" href="/assets/favicon.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Inter:wght@400;500;600&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/style.css?v=1795371819">
+</head>
+<body class="pm-page">
+<nav class="pill" aria-label="Main">
+  <a class="dot" href="/" aria-label="Home"></a>
+  <a href="/#work">Work</a>
+  <a href="/#about">Journey</a>
+  <a href="/#life" class="on">Off the clock</a>
+  <a href="/#blog">Blog</a>
+  <a href="/#contact">Contact</a>
+</nav>
+<div class="themer" data-themer role="group" aria-label="Pick your vibe">
+  <span class="themer-label">pick your vibe</span>
+  <button data-set-theme="cream" aria-label="Cream theme" data-name="Cream" style="--a:#f6f1e7;--b:#1f2bff"></button>
+  <button data-set-theme="midnight" aria-label="Midnight theme" data-name="Midnight" style="--a:#14131c;--b:#7c85ff"></button>
+  <button data-set-theme="sunset" aria-label="Sunset theme" data-name="Sunset" style="--a:#fff1e6;--b:#e4442b"></button>
+  <button data-set-theme="mint" aria-label="Mint theme" data-name="Mint" style="--a:#eaf6ee;--b:#0e7a5a"></button>
+  <button data-set-theme="lilac" aria-label="Lilac theme" data-name="Lilac" style="--a:#f1ecff;--b:#6a3df5"></button>
+  <button data-set-theme="mono" aria-label="Noir theme" data-name="Noir" style="--a:#fff;--b:#000"></button>
+</div>
+<main class="pm">
+  <header class="pm-head">
+    <a class="back" href="/#life">← Beyond the portfolio</a>
+    <div class="pm-title"><h1>Poems</h1><span class="note n3">poetry on the side</span></div>
+    <p class="lede">I write to make sense of things I can’t fit into a design brief. These are the finished ones.</p>
+    <p class="pm-count"><b id="poemN">0</b> poems</p>
+  </header>
+  <div class="pm-grid" id="poemGrid"></div>
+  <p class="pm-hint">move your cursor left or right to flip through ↔</p>
+  <section class="pm-desk" id="pmDesk" hidden aria-label="Poetry notebook on a desk">
+    <svg class="dk dk-pencil" viewBox="0 0 220 28" aria-hidden="true"><path d="M8 14 L34 3 H196 a8 8 0 0 1 0 22 H34 Z" fill="#ffe27a" stroke="#16150f" stroke-width="3" stroke-linejoin="round"/><path d="M8 14 L34 3 V25 Z" fill="#f2d3a8" stroke="#16150f" stroke-width="3" stroke-linejoin="round"/><path d="M8 14 L18 9.5 V18.5 Z" fill="#16150f"/><rect x="190" y="3" width="26" height="22" rx="8" fill="#ffb4a2" stroke="#16150f" stroke-width="3"/><path d="M60 8 H180 M60 20 H180" stroke="#16150f" stroke-width="2" opacity=".35"/></svg>
+    <svg class="dk dk-mug" viewBox="0 0 150 120" aria-hidden="true"><path d="M112 40 a26 26 0 0 1 0 46" fill="none" stroke="#16150f" stroke-width="14" stroke-linecap="round"/><path d="M112 40 a26 26 0 0 1 0 46" fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round"/><circle cx="62" cy="62" r="52" fill="#fff" stroke="#16150f" stroke-width="3.5"/><circle cx="62" cy="62" r="42" fill="#a9d8ff" stroke="#16150f" stroke-width="3"/><circle cx="62" cy="62" r="34" fill="#6b4331"/><path d="M42 54 q20 -14 40 0" fill="none" stroke="#c8a083" stroke-width="3" stroke-linecap="round"/></svg>
+    <svg class="dk dk-clip" viewBox="0 0 40 90" aria-hidden="true"><path d="M12 72 V22 a8 8 0 0 1 16 0 V74 a12 12 0 0 1 -24 0 V28" fill="none" stroke="#16150f" stroke-width="3.5" stroke-linecap="round"/></svg>
+  </section>
+  <p class="pm-empty" hidden>Poems are on their way. Check back soon.</p>
+  <noscript><p>Please enable JavaScript to read the poems.</p></noscript>
+  <div class="pm-admin" hidden>
+    <b>Edit mode</b> <span>Changes show only in this browser until you export poems.json and replace content/poems.json.</span>
+    <form><input type="text" name="title" placeholder="Title" required><input type="text" name="date" placeholder="Date, e.g. March 2025"><textarea name="text" placeholder="The poem (line breaks are kept)" required></textarea>
+    <label><input type="checkbox" name="published"> Published somewhere</label><input type="text" name="link" placeholder="Link to where it was published (optional)">
+    <button>Add poem</button></form>
+    <div><button class="pm-export">Export poems.json</button> <button class="pm-reset">Discard my edits</button></div>
+  </div>
+</main>
+<div class="pm-pop" id="pmPop" hidden role="dialog" aria-modal="true" aria-label="Poem">
+  <div class="pm-sheet"><button class="pm-x" aria-label="Close">×</button>
+    <h2 class="pm-h"></h2><div class="pm-d"></div><span class="pm-b">★ published</span><a class="pm-l" target="_blank" rel="noopener">read it where it was published →</a>
+    <div class="pm-t"></div>
+    <button class="pm-del" hidden>Remove this poem</button>
+    <div class="pm-nav"><button class="pm-prev">← previous</button><button class="pm-next">next →</button></div></div>
+</div>
+<footer><span>© 2026 Arushi</span><span><a href="/#life">Back to Off the clock</a></span></footer>
+<script src="/assets/js/main.js?v=1795371819" defer></script>
+<script>window.__POEMS=[];</script>
+<script src="/assets/js/poems.js?v=1795371819" defer></script>
+</body>
+</html>

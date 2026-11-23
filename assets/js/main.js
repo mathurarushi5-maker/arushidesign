@@ -212,3 +212,17 @@ if (themer) {
   addEventListener("resize", frame);
   frame();
 })();
+
+// off the clock iframe: auto height, fullscreen while inside a room
+(function () {
+  const f = document.querySelector(".otc");
+  if (!f) return;
+  addEventListener("message", (e) => {
+    if (e.source !== f.contentWindow || !e.data || !e.data.otc) return;
+    const was = f.classList.contains("full");
+    f.classList.toggle("full", e.data.room);
+    document.documentElement.style.overflow = e.data.room ? "hidden" : "";
+    if (!e.data.room && e.data.h) f.style.height = e.data.h + "px";
+    if (was && !e.data.room) document.getElementById("life").scrollIntoView({ block: "start" });
+  });
+})();

@@ -7,6 +7,10 @@ import time
 import html
 import os
 import shutil
+import sys
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import decor
+import decor_cozy
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 data = json.load(open(f"{ROOT}/content/site.json", encoding="utf-8"))
@@ -74,20 +78,8 @@ FACT_ICONS = [
 
 
 def life_section():
-    l = data["life"]
-    tilts = (-2, 1.5, -1, 2)
-    cards = "".join(
-        f'<div class="fact reveal" style="--r:{tilts[i % 4]}deg"><svg class="ico" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">{FACT_ICONS[i % 4]}</svg><span class="note">{e(f["label"])}</span><p>{e(f["text"])}</p></div>'
-        for i, f in enumerate(l["facts"])
-    )
-    return f"""<section id="life" class="life">
-    <span class="note n3">the human part</span>
-    <h2 class="reveal">{e(l['title'])}</h2>
-    <p class="life-intro reveal">{e(l['intro'])}</p>
-    <div class="facts">{cards}</div>
-    <div class="sticker l1" data-drag aria-hidden="true"><svg viewBox="0 0 120 50" fill="none" stroke="#1f2bff" stroke-width="7" stroke-linecap="round"><path d="M6 28q14-26 28 0t28 0 28 0 22 0"/></svg></div>
-    <div class="sticker l2" data-drag aria-hidden="true"><svg viewBox="0 0 64 64"><path d="M32 4l7 19 20 1-16 12 6 20-17-12-17 12 6-20L5 24l20-1z" fill="#c8f560" stroke="#c8f560" stroke-width="6" stroke-linejoin="round"/></svg></div>
-    <div class="sticker l3" data-drag aria-hidden="true"><svg viewBox="0 0 64 64"><path d="M32 54C10 38 6 26 12 18c5-6 14-5 20 3 6-8 15-9 20-3 6 8 2 20-20 36z" fill="none" stroke="#16150f" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/></svg></div>
+    return """<section id="life" class="life otc-sec">
+    <iframe class="otc" src="/assets/off-the-clock.html" title="Beyond the portfolio: off the clock" loading="lazy"></iframe>
   </section>"""
 
 
@@ -331,6 +323,317 @@ def project_page(i, p):
 """
 
 
+def cover_colors(path):
+    """Spine colours taken from the cover: dominant saturated colour, a second accent, and a readable text colour."""
+    try:
+        from PIL import Image
+        im = Image.open(path).convert("RGB").resize((40, 60))
+    except Exception:
+        return None
+    buckets = {}
+    for r, g, b in im.getdata():
+        mx, mn = max(r, g, b), min(r, g, b)
+        w = 1 + 3 * (mx - mn) / (mx or 1) + (0.5 if 50 < mx < 235 else 0)
+        a = buckets.setdefault((r // 40, g // 40, b // 40), [0, 0, 0, 0, 0])
+        a[0] += w; a[1] += 1; a[2] += r; a[3] += g; a[4] += b
+    top = sorted(buckets.values(), reverse=True)[:2]
+    avg = lambda a: tuple(round(a[i] / a[1]) for i in (2, 3, 4))
+    c1 = avg(top[0]); c2 = avg(top[-1])
+    lum = lambda c: (0.299 * c[0] + 0.587 * c[1] + 0.114 * c[2])
+    fg = "#16150f" if lum(c1) > 140 else "#fbf6ea"
+    hx = lambda c: "#%02x%02x%02x" % c
+    return hx(c1), fg, hx(c2)
+
+
+def cozy_rows(sp):
+    flame = lambda x, y, d: f'<g transform="translate({x} {y})"><path d="M0 0C-4.5 -6 -2.5 -12 0 -17C2.5 -12 4.5 -6 0 0z" fill="#ffd36e"><animateTransform attributeName="transform" type="scale" values="1 1;.88 1.14;1.06 .94;1 1" dur="{d}s" repeatCount="indefinite"/></path><path d="M0 -1C-2 -4 -1 -8 0 -10C1 -8 2 -4 0 -1z" fill="#fff4c9"/></g>'
+    glow = lambda x, y: f'<circle cx="{x}" cy="{y}" r="16" fill="#ffe6a0" opacity=".35"><animate attributeName="opacity" values=".25;.45;.3;.25" dur="2.6s" repeatCount="indefinite"/></circle>'
+    bookend = lambda flip="": f'<svg class="deco bookend {flip}" viewBox="0 0 40 110" aria-hidden="true"><defs><linearGradient id="beg" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#b9573a"/><stop offset=".45" stop-color="#ee9d7c"/><stop offset="1" stop-color="#a94d33"/></linearGradient><linearGradient id="beb" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e8b04f"/><stop offset="1" stop-color="#9a6a1c"/></linearGradient></defs><ellipse cx="20" cy="106" rx="19" ry="3" fill="#000" opacity=".2"/><path d="M14 98 V20 Q14 4 26 4 Q36 4 36 18 V98z" fill="url(#beg)"/><path d="M19 22 V92" stroke="#fff" stroke-opacity=".35" stroke-width="3" stroke-linecap="round"/><path d="M14 40 H36 M14 60 H36" stroke="#7d3a26" stroke-opacity=".35" stroke-width="1.5"/><path d="M26 12 l3 5 -3 5 -3 -5z" fill="url(#beb)"/><rect x="2" y="96" width="36" height="9" rx="3" fill="url(#beb)"/><rect x="2" y="96" width="36" height="3" rx="1.5" fill="#fff" opacity=".35"/></svg>'
+    candles = '<svg class="deco candles" viewBox="0 0 76 100" aria-hidden="true"><ellipse cx="38" cy="96" rx="34" ry="4" fill="#000" opacity=".12"/><rect x="6" y="90" width="64" height="8" rx="3" fill="#caa070"/><rect x="12" y="36" width="20" height="54" rx="3" fill="#fbf1de"/><rect x="12" y="36" width="6" height="54" rx="3" fill="#fff" opacity=".6"/><rect x="42" y="56" width="20" height="34" rx="3" fill="#f6c9c4"/><rect x="42" y="56" width="6" height="34" rx="3" fill="#fff" opacity=".45"/><path d="M22 36 v-5 M52 56 v-5" stroke="#6b4a33" stroke-width="2"/>' + glow(22, 22) + glow(52, 44) + flame(22, 31, 1.9) + flame(52, 51, 2.4) + '</svg>'
+    jar = '<svg class="deco jar" viewBox="0 0 44 50" aria-hidden="true"><rect x="6" y="20" width="32" height="28" rx="6" fill="#cfe6dc" opacity=".9"/><rect x="9" y="26" width="26" height="19" rx="3" fill="#fbe6c8"/><path d="M12 22 v22" stroke="#fff" stroke-width="3" opacity=".6" stroke-linecap="round"/><rect x="8" y="16" width="28" height="6" rx="2" fill="#caa070"/><path d="M22 26 v-4" stroke="#6b4a33" stroke-width="2"/>' + glow(22, 10) + flame(22, 20, 2.1) + '</svg>'
+    stack = lambda items, top="": '<div class="hstack">' + ''.join(f'<span class="fl">{x}</span>' for x in items) + top + '</div>'
+    row = lambda *c: '<div class="srow">' + ''.join(c) + '</div>'
+    lean = lambda x: x.replace('class="bk-w"', 'class="bk-w lean"', 1)
+    flat = lambda x: x.replace('class="bk-w"', 'class="bk-w flat"', 1)
+    return (
+        row(*sp[0:8], candles)
+        + row(*sp[8:14], stack([flat(x) for x in (sp[16], sp[15], sp[14])], jar))
+        + row(*sp[17:21], lean(sp[21]), jar, candles)
+    ).replace('<div class="srow">', '<div class="srow">')
+
+
+def library_page():
+    lib = json.load(open(f"{ROOT}/content/library.json", encoding="utf-8"))
+    books = lib["books"]
+    palette = [("#d2f26f", "#16150f"), ("#ffb4a2", "#16150f"), ("#1f2bff", "#d2f26f"), ("#ffffff", "#16150f"), ("#ffe27a", "#16150f"), ("#c9c2ff", "#16150f"), ("#a9d8ff", "#16150f")]
+    series_col, spines, hmax = {}, [], 0
+    for i, b in enumerate(books):
+        key = b.get("series") or f"b{i}"
+        if key not in series_col:
+            series_col[key] = palette[len(series_col) % len(palette)]
+        bg, fg = series_col[key]
+        cc = cover_colors(f"{ROOT}{b['cover']}") if b.get("cover") else None
+        acc = "currentColor"
+        if cc:
+            bg, fg, acc = cc
+        label = b.get("spine") or b["title"]
+        w = max(32, min(46, 28 + len(label) * .75))
+        h = max(240, min(300, round(200 + len(label) * 4)))
+        if b.get("series"):
+            h = 270
+        hmax = max(hmax, h)
+        rating = "" if b.get("rating") is None else b["rating"]
+        spines.append(
+            f'<div class="bk-w" data-genre="{e(b["genre"])}" data-status="{e(b.get("status", "read"))}">'
+            f'<button class="bk" style="--bg:{bg};--fg:{fg};--ac:{acc};--w:{w:.0f}px;--h:{h}px" '
+            f'data-title="{e(b["title"])}" data-author="{e(b["author"])}" data-genre="{e(b["genre"])}" '
+            f'data-status="{e(b.get("status", "read"))}" data-rating="{rating}" data-note="{e(b.get("note", ""))}" '
+            f'data-year="{e(str(b.get("year", "")))}" data-cover="{e(b.get("cover", ""))}" aria-label="{e(b["title"])} by {e(b["author"])}">'
+            f'<span class="bk-t">{e(label)}</span><span class="bk-a">{e(b["author"].split()[-1])}</span></button></div>'
+        )
+    libjson = json.dumps(books, ensure_ascii=False).replace("</", "<\\/")
+    genres = []
+    for b in books:
+        if b["genre"] not in genres:
+            genres.append(b["genre"])
+    pills = '<button class="on" data-f="">All</button>' + "".join(f'<button data-f="{e(g)}">{e(g)}</button>' for g in genres)
+    return head("Library — Arushi", lib["intro"]) + f"""
+<body class="lib-page">
+{nav('life')}
+<main class="lib">
+  <header class="lib-head">
+    <a class="back" href="/#life">← Beyond the portfolio</a>
+    <div class="lib-title"><h1>{e(lib['title'])}</h1><span class="note n3">always reading</span></div>
+    <p class="lede">{e(lib['intro'])}</p>
+    <p class="lib-count"><b id="libN">{len(books)}</b> books on the shelf</p>
+    <div class="room-switch" role="group" aria-label="Room style"><span>Room style</span><button type="button" data-style="real">Realistic</button><button type="button" data-style="cozy">Storybook</button></div>
+  </header>
+  <div class="room">
+    {decor_cozy.FILTER}{decor.ALL}{decor_cozy.ALL}<div class="sunfloor"></div>
+    <div class="sunbeam"></div><div class="case">{decor_cozy.CASE_EXTRA}<div class="shelf" id="shelf" style="--row:{hmax + 30}px">{cozy_rows(spines)}</div></div>
+    <div class="floor"></div>
+  </div>
+  <script>
+  (function(){{var r=document.querySelector(".room"),b=document.querySelectorAll(".room-switch button");
+  function set(s){{r.classList.toggle("cozy",s==="cozy");b.forEach(function(x){{x.setAttribute("aria-pressed",x.dataset.style===s)}});try{{localStorage.setItem("roomStyle",s)}}catch(e){{}}}}
+  b.forEach(function(x){{x.onclick=function(){{set(x.dataset.style)}}}});
+  var v="real";try{{v=localStorage.getItem("roomStyle")||"real"}}catch(e){{}};set(v==="cozy"?"cozy":"real");}})();
+  </script>
+  <p class="lib-empty" hidden>Nothing on this shelf yet.</p>
+  <div class="lib-admin" hidden>
+    <b>Edit mode</b> <span>Changes show only in this browser until you export.</span>
+    <form class="lib-add"><input name="q" placeholder="Search a book to add (title or author)" required><button>Search</button></form>
+    <ul class="lib-res"></ul>
+    <button class="lib-export">Export library.json</button> <button class="lib-reset">Discard my edits</button>
+  </div>
+</main>
+<div class="bk-pop" id="bkPop" hidden role="dialog" aria-modal="true" aria-label="Book details">
+  <div class="bk-card"><button class="bk-x" aria-label="Close">×</button>
+    <div class="bk-cv"><img alt=""></div>
+    <div class="bk-info"><span class="bk-g"></span><h2 class="bk-h"></h2><p class="bk-by"></p><p class="bk-r"></p>
+    <div class="bk-edit" hidden><div class="bk-stars" role="group" aria-label="Rating"></div><button class="bk-save">Save</button></div></div></div>
+</div>
+<footer><span>© 2026 Arushi</span><span><a href="/#life">Back to Off the clock</a></span></footer>
+<script src="/assets/js/main.js?v={ASSET_V}" defer></script>
+<script>window.__LIB={libjson};</script>
+<script src="/assets/js/library.js?v={ASSET_V}" defer></script>
+</body>
+</html>
+"""
+
+
+def poems_page():
+    pm = json.load(open(f"{ROOT}/content/poems.json", encoding="utf-8"))
+    pj = json.dumps(pm["poems"], ensure_ascii=False).replace("</", "<\\/")
+    return head("Poems — Arushi", pm["intro"]) + f"""
+<body class="pm-page">
+{nav('life')}
+<main class="pm">
+  <header class="pm-head">
+    <a class="back" href="/#life">← Beyond the portfolio</a>
+    <div class="pm-title"><h1>{e(pm['title'])}</h1><span class="note n3">poetry on the side</span></div>
+    <p class="lede">{e(pm['intro'])}</p>
+    <p class="pm-count"><b id="poemN">{len(pm['poems'])}</b> poems</p>
+  </header>
+  <div class="pm-grid" id="poemGrid"></div>
+  <p class="pm-hint">move your cursor left or right to flip through ↔</p>
+  <section class="pm-desk" id="pmDesk" hidden aria-label="Poetry notebook on a desk">
+    <svg class="dk dk-pencil" viewBox="0 0 220 28" aria-hidden="true"><path d="M8 14 L34 3 H196 a8 8 0 0 1 0 22 H34 Z" fill="#ffe27a" stroke="#16150f" stroke-width="3" stroke-linejoin="round"/><path d="M8 14 L34 3 V25 Z" fill="#f2d3a8" stroke="#16150f" stroke-width="3" stroke-linejoin="round"/><path d="M8 14 L18 9.5 V18.5 Z" fill="#16150f"/><rect x="190" y="3" width="26" height="22" rx="8" fill="#ffb4a2" stroke="#16150f" stroke-width="3"/><path d="M60 8 H180 M60 20 H180" stroke="#16150f" stroke-width="2" opacity=".35"/></svg>
+    <svg class="dk dk-mug" viewBox="0 0 150 120" aria-hidden="true"><path d="M112 40 a26 26 0 0 1 0 46" fill="none" stroke="#16150f" stroke-width="14" stroke-linecap="round"/><path d="M112 40 a26 26 0 0 1 0 46" fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round"/><circle cx="62" cy="62" r="52" fill="#fff" stroke="#16150f" stroke-width="3.5"/><circle cx="62" cy="62" r="42" fill="#a9d8ff" stroke="#16150f" stroke-width="3"/><circle cx="62" cy="62" r="34" fill="#6b4331"/><path d="M42 54 q20 -14 40 0" fill="none" stroke="#c8a083" stroke-width="3" stroke-linecap="round"/></svg>
+    <svg class="dk dk-clip" viewBox="0 0 40 90" aria-hidden="true"><path d="M12 72 V22 a8 8 0 0 1 16 0 V74 a12 12 0 0 1 -24 0 V28" fill="none" stroke="#16150f" stroke-width="3.5" stroke-linecap="round"/></svg>
+  </section>
+  <p class="pm-empty" hidden>Poems are on their way. Check back soon.</p>
+  <noscript><p>Please enable JavaScript to read the poems.</p></noscript>
+  <div class="pm-admin" hidden>
+    <b>Edit mode</b> <span>Changes show only in this browser until you export poems.json and replace content/poems.json.</span>
+    <form><input type="text" name="title" placeholder="Title" required><input type="text" name="date" placeholder="Date, e.g. March 2025"><textarea name="text" placeholder="The poem (line breaks are kept)" required></textarea>
+    <label><input type="checkbox" name="published"> Published somewhere</label><input type="text" name="link" placeholder="Link to where it was published (optional)">
+    <button>Add poem</button></form>
+    <div><button class="pm-export">Export poems.json</button> <button class="pm-reset">Discard my edits</button></div>
+  </div>
+</main>
+<div class="pm-pop" id="pmPop" hidden role="dialog" aria-modal="true" aria-label="Poem">
+  <div class="pm-sheet"><button class="pm-x" aria-label="Close">×</button>
+    <h2 class="pm-h"></h2><div class="pm-d"></div><span class="pm-b">★ published</span><a class="pm-l" target="_blank" rel="noopener">read it where it was published →</a>
+    <div class="pm-t"></div>
+    <button class="pm-del" hidden>Remove this poem</button>
+    <div class="pm-nav"><button class="pm-prev">← previous</button><button class="pm-next">next →</button></div></div>
+</div>
+<footer><span>© 2026 Arushi</span><span><a href="/#life">Back to Off the clock</a></span></footer>
+<script src="/assets/js/main.js?v={ASSET_V}" defer></script>
+<script>window.__POEMS={pj};</script>
+<script src="/assets/js/poems.js?v={ASSET_V}" defer></script>
+</body>
+</html>
+"""
+
+
+def gallery_page():
+    g = json.load(open(f"{ROOT}/content/gallery.json", encoding="utf-8"))
+    gj = json.dumps(g["items"], ensure_ascii=False).replace("</", "<\\/")
+    return head("Paint & pencil — Arushi", g["intro"]) + f"""
+<body class="gl-page">
+{nav('life')}
+<main class="gl">
+  <header class="gl-head">
+    <a class="back" href="/#life">← Beyond the portfolio</a>
+    <div class="gl-title"><h1>{e(g['title'])}</h1><span class="note n3">hands busy, eye sharp</span></div>
+    <p class="lede">{e(g['intro'])}</p>
+    <div class="gl-filters" role="group" aria-label="Filter">
+      <button class="on" data-f="all">All</button><button data-f="pencil">Pencil</button><button data-f="paint">Paint</button>
+      <span class="gl-count"><b id="glN">0</b> pieces</span>
+    </div>
+  </header>
+  <section class="gl-wall" id="glWall" aria-label="Art wall"></section>
+  <p class="gl-empty" hidden>The wall is being hung. Check back soon.</p>
+  <noscript><p>Please enable JavaScript to see the art.</p></noscript>
+  <div class="gl-admin" hidden>
+    <b>Edit mode</b> <span>Put image files in assets/art/, add them here, then export gallery.json and replace content/gallery.json. Changes show only in this browser until then.</span>
+    <form><input type="text" name="title" placeholder="Title" required><input type="text" name="image" placeholder="Image path, e.g. /assets/art/cat.jpg">
+    <select name="medium"><option value="pencil">Pencil</option><option value="paint">Paint</option></select>
+    <input type="text" name="year" placeholder="Year"><input type="text" name="note" placeholder="Short note (optional)">
+    <label><input type="checkbox" name="wip"> Work in progress</label><button>Add piece</button></form>
+    <div><button class="gl-export">Export gallery.json</button> <button class="gl-reset">Discard my edits</button></div>
+  </div>
+</main>
+<div class="gl-lb" id="glLb" hidden role="dialog" aria-modal="true" aria-label="Artwork">
+  <button class="gl-x" aria-label="Close">×</button><button class="gl-prev" aria-label="Previous">←</button><button class="gl-next" aria-label="Next">→</button>
+  <figure><div class="gl-img"></div><figcaption><h2></h2><p class="gl-meta"></p><p class="gl-note"></p><button class="gl-del" hidden>Remove this piece</button></figcaption></figure>
+</div>
+<footer><span>© 2026 Arushi</span><span><a href="/#life">Back to Off the clock</a></span></footer>
+<script src="/assets/js/main.js?v={ASSET_V}" defer></script>
+<script>window.__ART={gj};</script>
+<script src="/assets/js/gallery.js?v={ASSET_V}" defer></script>
+</body>
+</html>
+"""
+
+
+from lab_art import GARLAND, HANG1, HANG2, VINE, DOODLES, MUG, MONSTERA, VASE, DISH
+
+
+SCREEN_SPOTS = [
+ ("moodboard","Moodboard",[(170,245),(395,225),(400,208),(565,205),(570,265),(603,300),(603,420),(560,440),(235,478),(210,470)]),
+ ("wireframe","Wireframe",[(607,205),(885,180),(920,383),(648,420)]),
+ ("sketch","Sketch",[(220,515),(405,490),(418,595),(245,630)]),
+ ("concept","Concept",[(440,490),(580,470),(608,590),(460,620)]),
+ ("landscape","Landscape",[(610,475),(752,445),(770,560),(630,592)]),
+ ("mockup","Mockup",[(790,440),(925,422),(948,530),(810,558)]),
+ ("code","Code",[(248,645),(430,630),(443,700),(430,745),(262,763),(248,700)]),
+ ("build","Build",[(820,580),(880,578),(885,640),(822,648)]),
+ ("flow","Flow",[(905,568),(962,563),(968,625),(910,632)]),
+]
+def screen_links(links):
+    out=[]
+    for k,label,pts in SCREEN_SPOTS:
+        poly=" ".join(f"{580+x/3:.0f},{490+y/3:.0f}" for x,y in pts)
+        l=links.get(k,{})
+        u=l.get("url",""); name=l.get("name","")
+        href=f' href="{e(u)}" target="_blank" rel="noopener"' if u else ''
+        aria=f' aria-label="{e(name)}"' if name else ' aria-hidden="true" tabindex="-1"'
+        tag=""
+        if name:
+            cx=sum(580+x/3 for x,_ in pts)/len(pts); ty=min(490+y/3 for _,y in pts)
+            w=len(name)*7+18
+            tag=f'<g class="tag" transform="translate({cx:.0f},{ty-6:.0f})"><rect x="{-w/2:.0f}" y="-20" width="{w}" height="20" rx="10"/><text y="-6" text-anchor="middle">{e(name)}</text></g>'
+        out.append(f'<a{href}{aria}><polygon points="{poly}"/>{tag}</a>')
+    return '<svg class="sc-links" viewBox="0 0 1536 1024" preserveAspectRatio="none">'+"".join(out)+'</svg>'
+
+def lab_page(v2=False):
+    g = json.load(open(f"{ROOT}/content/lab.json", encoding="utf-8"))
+    gj = json.dumps(g["items"], ensure_ascii=False).replace("</", "<\\/")
+    return head("Lab — Arushi", g["intro"]) + f"""
+<body class="{'lb-page lb-v2' if v2 else 'lb-page'}">
+{nav('life')}
+<main class="lbm">
+  <div class="lb-room">
+  <header class="lb-head">
+    <a class="back" href="/#life">← Beyond the portfolio</a>
+    <div class="room-switch lb-switch" role="group" aria-label="Room style"><span>room</span><button type="button" data-v="1" aria-pressed="true">Sunlit Studio</button><button type="button" data-v="2" aria-pressed="false">Realistic</button></div>
+    <div class="lb-title"><h1>{e(g['title'])}</h1><span class="note n3">ai tinkering</span></div>
+    <p class="lede">{e(g['intro'])}</p>
+    <p class="lb-tip">click anything on the laptop screen to open it</p>
+  </header>
+  <div class="lb-scene" aria-label="Laptop on a desk">
+    <div class="sc-window" aria-hidden="true"><i class="p1"></i><i class="p2"></i><i class="rail"></i></div>
+    <div class="sc-wall" aria-hidden="true"></div>
+    <div class="sc-beam" aria-hidden="true"></div>
+    <div class="sc-sill" aria-hidden="true"></div>
+    <div class="sc-ceil" aria-hidden="true"></div>
+    <div class="sc-desk" aria-hidden="true"><i class="tt"></i></div>
+    <div class="sc-patch" aria-hidden="true"></div>
+    <div class="sc-floor" aria-hidden="true"></div>
+    <div class="sc-leg l" aria-hidden="true"></div><div class="sc-leg r" aria-hidden="true"></div>
+    <div class="sc-edge" aria-hidden="true"></div>
+    <div class="sc-cloth" aria-hidden="true"></div>
+    <i class="sh sh-mug"></i><i class="sh sh-dish"></i><i class="sh sh-pot"></i><i class="sh sh-vase"></i><i class="sh sh-lap"></i>
+    {GARLAND}{HANG1}{HANG2}{VINE}
+    {DOODLES}
+    {MUG}{DISH}{MONSTERA}{VASE}
+    {screen_links(g.get("links",{}))}
+    <div class="sc-laptop">
+    <div class="lb-laptop">
+      <div class="lb-lid"><div class="lb-cam"></div>
+        <div class="lb-screen" id="lbScreen">
+          <div class="lb-menubar"><b>◉ lab</b><span>experiments</span><span class="lb-clock" id="lbClock"></span></div>
+          <div class="lb-icons" id="lbIcons"></div>
+          <p class="lb-empty" hidden>Empty desktop. Experiments are on their way.</p>
+          <div class="lb-win" id="lbWin" hidden role="dialog" aria-label="Experiment">
+            <div class="lb-bar"><span class="lb-dots"><button class="d-r" aria-label="Close"></button><button class="d-y" aria-label="Back to desktop"></button><button class="d-g" aria-label="Full screen"></button></span><span class="lb-wt"></span><button class="lb-fs">⤢ full screen</button></div>
+            <div class="lb-body"><div class="lb-shot"></div>
+              <h2></h2><p class="lb-meta"></p><p class="lb-tools"></p>
+              <h4>What I tried</h4><p class="lb-what"></p><h4>What I learned</h4><p class="lb-learn"></p>
+              <a class="lb-try" target="_blank" rel="noopener">try it →</a><button class="lb-del" hidden>Remove</button></div>
+          </div>
+        </div>
+      </div>
+      <div class="lb-base"><i></i></div>
+    </div>
+    </div>
+  </div>
+  </div>
+  <noscript><p>Please enable JavaScript to see the experiments.</p></noscript>
+  <div class="lb-admin" hidden>
+    <b>Edit mode</b> <span>Add experiments, then export lab.json and replace content/lab.json. Screenshots go in assets/lab/. An embed URL shows a live page inside the window. Changes show only in this browser until then.</span>
+    <form><input type="text" name="title" placeholder="Name" required>
+    <select name="type"><option>prototype</option><option>image</option><option>agent</option><option>workflow</option></select>
+    <select name="status"><option value="works">works</option><option value="cooking">still cooking</option><option value="broken">broken</option></select>
+    <input type="text" name="date" placeholder="Date, e.g. Nov 2026"><input type="text" name="tools" placeholder="Tools, comma separated">
+    <input type="text" name="what" placeholder="What I tried"><input type="text" name="learned" placeholder="What I learned"><input type="text" name="link" placeholder="Try-it link (optional)"><input type="text" name="image" placeholder="Screenshot path (optional)"><input type="text" name="embed" placeholder="Embed URL for live demo (optional)">
+    <button>Add experiment</button></form>
+    <div><button class="lb-export">Export lab.json</button> <button class="lb-reset">Discard my edits</button></div>
+  </div>
+</main>
+<footer><span>© 2026 Arushi</span><span><a href="/#life">Back to Off the clock</a></span></footer>
+<script src="/assets/js/main.js?v={ASSET_V}" defer></script>
+<script>window.__LAB={gj};</script>
+<script src="/assets/js/lab.js?v={ASSET_V}" defer></script>
+<script>(function(){{var b=document.body,k='lbRoom',sw=document.querySelectorAll('.lb-switch button');function set(v){{b.classList.toggle('lb-v2',v==='2');sw.forEach(function(x){{x.setAttribute('aria-pressed',x.dataset.v===v)}});try{{localStorage.setItem(k,v)}}catch(e){{}}}}sw.forEach(function(x){{x.onclick=function(){{set(x.dataset.v)}}}});var q=(location.search.match(/room=(\d)/)||[])[1];var s;try{{s=localStorage.getItem(k)}}catch(e){{}}set(q||s||'1')}})()</script>
+</body>
+</html>
+"""
+
+
 def write(path, content):
     os.makedirs(os.path.dirname(path), exist_ok=True)
     open(path, "w", encoding="utf-8").write(content)
@@ -340,5 +643,13 @@ write(f"{ROOT}/index.html", index())
 for i, p in enumerate(projects):
     shutil.rmtree(f"{ROOT}/{p['slug']}", ignore_errors=True)
     write(f"{ROOT}/{p['slug']}/index.html", project_page(i, p))
+shutil.rmtree(f"{ROOT}/library", ignore_errors=True)
+write(f"{ROOT}/library/index.html", library_page())
+shutil.rmtree(f"{ROOT}/poems", ignore_errors=True)
+write(f"{ROOT}/poems/index.html", poems_page())
+shutil.rmtree(f"{ROOT}/gallery", ignore_errors=True)
+write(f"{ROOT}/gallery/index.html", gallery_page())
+shutil.rmtree(f"{ROOT}/lab", ignore_errors=True)
+write(f"{ROOT}/lab/index.html", lab_page())
 write(f"{ROOT}/.nojekyll", "")
-print("built", 1 + len(projects), "pages")
+print("built", 2 + len(projects), "pages")
