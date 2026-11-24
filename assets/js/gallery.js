@@ -52,7 +52,7 @@
     const p = shown[cur];
     q(".gl-img").replaceChildren(art(p, true));
     q("h2").textContent = p.title;
-    q(".gl-meta").textContent = [p.medium === "paint" ? "Paint" : "Pencil", p.year, p.wip ? "work in progress" : ""].filter(Boolean).join(" · ");
+    q(".gl-meta").textContent = [p.medium === "paint" ? "Colors" : "Pen", p.year, p.wip ? "work in progress" : ""].filter(Boolean).join(" · ");
     q(".gl-note").textContent = p.note || "";
     q(".gl-del").hidden = !EDIT;
     lb.hidden = false;

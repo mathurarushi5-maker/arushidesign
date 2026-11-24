@@ -1,6 +1,6 @@
 {
   "title": "Library",
-  "intro": "Stories are where most of my ideas start. Here's everything I've read so far, and what I'm reading next.",
+  "intro": "Stories are where most of my ideas start. Here’s what I’m reading right now.",
   "books": [
     {
       "title": "Harry Potter and the Philosopher's Stone",
@@ -228,6 +228,20 @@
       "rating": null,
       "note": "",
       "cover": "/assets/covers/the-subtle-art-of-not-giving-a-f-ck.jpg"
+    }
+  ],
+  "shelf": [
+    {
+      "label": "Last read",
+      "title": "Harry Potter and the Goblet of Fire"
+    },
+    {
+      "label": "Currently reading",
+      "title": "The Forest of Enchantments"
+    },
+    {
+      "label": "Next on the list",
+      "title": "The Palace of Illusions"
     }
   ]
 }

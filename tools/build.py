@@ -2,6 +2,8 @@
 
 Usage: python3 tools/build.py
 """
+import glob
+import re
 import json
 import time
 import html
@@ -26,6 +28,11 @@ FONTS = (
 )
 
 
+def hl(t, words):
+    for w in words:
+        t = t.replace(w, '<mark class="hl">' + w + '</mark>', 1)
+    return t.replace('to product designer', 'to <mark class="hl">product designer</mark>', 1)
+
 def head(title, desc, og_image=None):
     og = f'<meta property="og:image" content="/assets/img/{og_image}">' if og_image else ""
     return f"""<!doctype html>
@@ -38,7 +45,7 @@ def head(title, desc, og_image=None):
 <meta property="og:title" content="{e(title)}">
 <meta property="og:description" content="{e(desc)}">
 {og}
-<script>try{{var t=localStorage.getItem("theme");if(t&&t!=="cream")document.documentElement.dataset.theme=t}}catch(e){{}}</script>
+<script>if(/[?&]embed/.test(location.search))document.documentElement.classList.add("embed");try{{var t=localStorage.getItem("theme");if(t&&t!=="cream")document.documentElement.dataset.theme=t}}catch(e){{}}</script>
 <link rel="icon" href="/assets/favicon.png" type="image/png">
 {FONTS}
 <link rel="stylesheet" href="/assets/css/style.css?v={ASSET_V}">
@@ -79,7 +86,7 @@ FACT_ICONS = [
 
 def life_section():
     return """<section id="life" class="life otc-sec">
-    <iframe class="otc" src="/assets/off-the-clock.html" title="Beyond the portfolio: off the clock" loading="lazy"></iframe>
+    <iframe class="otc" src="/assets/off-the-clock.html?v=""" + str(ASSET_V) + """" title="Beyond the portfolio: off the clock" loading="lazy"></iframe>
   </section>"""
 
 
@@ -106,18 +113,155 @@ def short(t, n=4):
     return t if len(w) <= n else " ".join(w[:n]) + "…"
 
 
-def blog_section():
+HOME_POSTS = 5
+NUM = re.compile(r"^\d+\. ")
+
+
+def load_posts():
+    """Reads content/blog/*.md. Only published, non-future posts are returned, newest first."""
     from datetime import date
+    out = []
+    for f in sorted(glob.glob(f"{ROOT}/content/blog/*.md")):
+        slug = os.path.basename(f)[:-3]
+        raw = open(f, encoding="utf-8").read()
+        m = re.match(r"---\n(.*?)\n---\n(.*)", raw, re.S)
+        if not m:
+            sys.exit(f"blog/{slug}.md: missing front matter (--- ... ---)")
+        meta = {}
+        for line in m.group(1).splitlines():
+            if ":" in line:
+                k, v = line.split(":", 1)
+                meta[k.strip()] = v.strip()
+        for req in ("title", "date"):
+            if not meta.get(req):
+                sys.exit(f"blog/{slug}.md: '{req}' is required")
+        try:
+            d = date.fromisoformat(meta["date"])
+        except ValueError:
+            sys.exit(f"blog/{slug}.md: date must be YYYY-MM-DD")
+        if meta.get("status", "draft").lower() != "published" or d > date.today():
+            continue
+        body = m.group(2).strip()
+        meta.update(slug=slug, d=d, body=body)
+        meta.setdefault("summary", "")
+        out.append(meta)
+    out.sort(key=lambda x: x["d"], reverse=True)
+    return out
+
+
+def md_inline(t):
+    t = e(t, quote=False)
+    t = re.sub(r"!\[([^\]]*)\]\(([^)]+)\)", r'<img src="\2" alt="\1" loading="lazy">', t)
+    t = re.sub(r"\[([^\]]+)\]\(([^)]+)\)", r'<a href="\2" target="_blank" rel="noopener">\1</a>', t)
+    t = re.sub(r"\*\*(.+?)\*\*", r"<strong>\1</strong>", t)
+    t = re.sub(r"(?<!\*)\*(?!\*)(.+?)(?<!\*)\*(?!\*)", r"<em>\1</em>", t)
+    return t.replace("\n", "<br>")
+
+
+def md_html(src):
+    out = []
+    for blk in re.split(r"\n{2,}", src.strip()):
+        blk = blk.strip()
+        if not blk:
+            continue
+        lines = blk.splitlines()
+        if blk.startswith("!["):
+            out.append(f'<figure>{md_inline(blk)}</figure>')
+        elif re.match(r"#{1,6} ", blk):
+            lvl = min(len(blk.split()[0]) + 1, 4)
+            out.append(f"<h{lvl}>{md_inline(blk.lstrip('# ').strip())}</h{lvl}>")
+        elif all(l.startswith("- ") for l in lines):
+            out.append("<ul>" + "".join(f"<li>{md_inline(l[2:])}</li>" for l in lines) + "</ul>")
+        elif all(re.match(r"\d+\. ", l) for l in lines):
+            out.append("<ol>" + "".join("<li>" + md_inline(NUM.sub("", l)) + "</li>" for l in lines) + "</ol>")
+        elif blk.startswith("> "):
+            out.append("<blockquote>" + md_inline(" ".join(l.lstrip("> ") for l in lines)) + "</blockquote>")
+        else:
+            out.append(f"<p>{md_inline(blk)}</p>")
+    return "\n".join(out)
+
+
+def blog_section():
+    allp = load_posts()
     posts = "".join(
-        f'<a class="post reveal" href="{e(b["url"])}" target="_blank" rel="noopener">'
-        f'<h3 title="{e(b["title"])}">{e(short(b["title"]))}</h3><span class="tag">{date.fromisoformat(b["date"]).strftime("%b %Y")}</span>'
+        f'<a class="post reveal" href="/blog/{b["slug"]}/">'
+        f'<h3 title="{e(b["title"])}">{e(short(b["title"]))}</h3><span class="tag">{b["d"].strftime("%b %Y")}</span>'
         f'<svg class="art" viewBox="0 0 120 100" fill="none" stroke="#16150f" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">{BLOG_ART[i % len(BLOG_ART)]}</svg></a>'
-        for i, b in enumerate(data["blog"])
+        for i, b in enumerate(allp[:HOME_POSTS])
     )
+    more = '<a class="blog-all" href="/blog/">All posts &rarr;</a>' if len(allp) > HOME_POSTS else ""
     return f"""<section id="blog" class="section blog">
     <div class="sec-head reveal"><h2>Blog &amp; <em>writing</em></h2><span class="note n2">on design, fintech &amp; AI</span></div>
     <div class="posts">{posts}</div>
+    {more}
   </section>"""
+
+
+def blog_shell(title, desc, body, og=None):
+    return head(title, desc, None) + f"""
+<body class="blogpage">
+<div class="grain"></div>
+{nav('blog')}
+<main>
+{body}
+</main>
+<footer><span>© 2026 Arushi</span><span><a href="/#contact">Let's talk</a></span></footer>
+<div class="lightbox" hidden><img alt=""></div>
+<script src="/assets/js/main.js?v={ASSET_V}" defer></script>
+</body>
+</html>
+"""
+
+
+def blog_index_page():
+    rows = "".join(
+        f'<a class="bl-row" href="/blog/{b["slug"]}/"><span class="bl-date">{b["d"].strftime("%b %Y")}</span>'
+        f'<span class="bl-main"><h2>{e(b["title"])}</h2><p>{e(b["summary"])}</p></span><i>&rarr;</i></a>'
+        for b in load_posts()
+    )
+    body = f"""<header class="bl-head"><a class="back" href="/#blog">← Home</a><h1>Blog &amp; <em>writing</em></h1><p class="lede">On design, fintech &amp; AI.</p></header>
+<section class="bl-list">{rows}</section>"""
+    return blog_shell("Blog — Arushi", "Writing on design, fintech and AI.", body)
+
+
+def short_txt(t, n=110):
+    t = " ".join(t.split())
+    return t if len(t) <= n else t[:n].rsplit(" ", 1)[0] + "…"
+
+
+def blog_post_page(i, b, allp):
+    cover = ""
+    if b.get("cover") and os.path.exists(f"{ROOT}{b['cover']}"):
+        cover = f'<img class="bp-cover" src="{e(b["cover"])}" alt="">'
+    def card(p, label, cls):
+        img = p.get("cover") if p.get("cover") and os.path.exists(f"{ROOT}{p['cover']}") else ""
+        th = f'<img src="{e(img)}" alt="" loading="lazy">' if img else ""
+        return (f'<div class="bp-col {cls}"><span class="note">{label}</span><a class="bp-card" href="/blog/{p["slug"]}/"><span class="bpc-img">{th}</span>'
+                f'<span class="bpc-txt"><h3>{e(p["title"])}</h3>'
+                f'<p>{e(short_txt(p["summary"], 80))}</p></span></a></div>')
+    prv = allp[i - 1] if i > 0 else None
+    nxt = allp[i + 1] if i + 1 < len(allp) else None
+    cards = (card(prv, "← previous", "is-prev") if prv else "") + (card(nxt, "next →", "is-next") if nxt else "")
+    nx = f'<nav class="bp-nav">{cards}</nav>' if cards else ""
+    body = f"""<article class="bp">
+  <header class="bp-head">
+    <a class="back" href="/blog/">← All posts</a>
+    <span class="note n1">{b["d"].strftime("%d %b %Y").lstrip("0")}</span>
+    <h1>{e(b["title"])}</h1>
+  </header>
+  {cover}
+  <div class="bp-body">
+{md_html(b["body"])}
+  </div>
+</article>
+{nx}"""
+    return blog_shell(f"{b['title']} — Arushi", b["summary"], body)
+
+
+def redirect_page(to):
+    return (f'<!doctype html><meta charset="utf-8"><title>Redirecting…</title>'
+            f'<link rel="canonical" href="{to}"><meta http-equiv="refresh" content="0;url={to}">'
+            f'<script>location.replace("{to}")</script><a href="{to}">Continue</a>')
 
 
 ICONS = {
@@ -212,7 +356,7 @@ def index():
       </li>""" for x in experience)
 
     chips = "".join(f'<button class="chip" data-filter="{c["id"]}">{e(c["label"])}</button>' for c in data["categories"])
-    marquee_words = ["Product design", "Brand identity", "Research", "Design systems", "AI experiences", "Strategy"]
+    marquee_words = ["Product design", "B2B / B2C", "UX research", "Generative AI", "Design systems", "Human-centric AI", "Design strategy", "Brand identity", "Illustration & art", "Team leadership"]
     marquee = "".join(f"<span>{w}</span><b>✺</b>" for w in marquee_words) * 2
     email = f'<a class="big-link" href="mailto:{e(site["email"])}">{e(site["email"])}</a>' if site["email"] else ""
 
@@ -223,8 +367,8 @@ def index():
 <main>
   <header class="hero" id="top">
     <div class="note n1">hi, I'm Arushi <svg viewBox="0 0 80 40"><path d="M2 8 C30 2 60 12 74 32 M74 32 l-10 -2 M74 32 l-3 -10"/></svg></div>
-    <h1>I design things <br>people <em>actually</em> <span class="u">use.</span></h1>
-    <p class="lede">{e(site['intro'])}</p>
+    <h1>I design things <br>people <em>actually</em> <span class="u">use.</span><span class="h1-sub">And a few they just like.</span></h1>
+    <p class="lede">{hl(e(site['intro']), ["lead product designer", "8+ years", "retail banker", "what people need"])}</p>
     <div class="cta"><a class="btn" href="#work">See my work</a><a class="btn ghost" href="#contact">Say hello</a></div>
     <div class="sticker s1" data-drag><span>lead product designer<br>@ Adobe</span></div>
     <div class="sticker s2" data-drag aria-hidden="true"><svg viewBox="0 0 100 100" width="100" height="100" fill="currentColor"><ellipse cx="50" cy="24" rx="12" ry="22" transform="rotate(0 50 50)"/><ellipse cx="50" cy="24" rx="12" ry="22" transform="rotate(45 50 50)"/><ellipse cx="50" cy="24" rx="12" ry="22" transform="rotate(90 50 50)"/><ellipse cx="50" cy="24" rx="12" ry="22" transform="rotate(135 50 50)"/><ellipse cx="50" cy="24" rx="12" ry="22" transform="rotate(180 50 50)"/><ellipse cx="50" cy="24" rx="12" ry="22" transform="rotate(225 50 50)"/><ellipse cx="50" cy="24" rx="12" ry="22" transform="rotate(270 50 50)"/><ellipse cx="50" cy="24" rx="12" ry="22" transform="rotate(315 50 50)"/><circle cx="50" cy="50" r="13" fill="#c8f560"/></svg></div>
@@ -237,7 +381,6 @@ def index():
 
   <section id="work" class="section">
     <div class="sec-head reveal"><h2>Selected <em>work</em></h2><span class="note n2">recent favourites</span></div>
-    <div class="filters reveal" role="group" aria-label="Filter projects"><button class="chip on" data-filter="all">All</button>{chips}</div>
     <div class="works">{''.join(cards)}
     </div>
   </section>
@@ -246,11 +389,12 @@ def index():
     <div class="about-in">
       <span class="note n3">a bit about me</span>
       <p class="about-big reveal">Bank-teller turned risk analyst turned <em>designer</em>. I don't believe in labels. I believe in <em>recognition</em> for the work I do, and in figuring out what people <span class="need">need.</span></p>
-      <div class="exp-wrap"><svg class="exp-line" viewBox="0 0 1000 600" preserveAspectRatio="none" aria-hidden="true"><defs><mask id="trail" maskUnits="userSpaceOnUse" x="0" y="0" width="1000" height="600"><path class="trail-mask" pathLength="1000" d="M70,470 C130,470 140,330 205,330 C250,330 262,372 290,390 C325,405 340,372 318,350 C294,328 258,342 266,370 C274,396 318,408 338,440 C350,458 365,450 380,420 C405,365 440,295 485,295 C540,295 545,415 600,415 C655,415 670,285 725,285 C780,285 785,440 835,440 C875,440 905,425 895,392 C886,360 846,352 846,380 C846,408 888,392 906,350 C920,315 928,230 925,160" fill="none" stroke="#fff" stroke-width="28" stroke-linecap="round"/></mask></defs><path class="trail-path" mask="url(#trail)" d="M70,470 C130,470 140,330 205,330 C250,330 262,372 290,390 C325,405 340,372 318,350 C294,328 258,342 266,370 C274,396 318,408 338,440 C350,458 365,450 380,420 C405,365 440,295 485,295 C540,295 545,415 600,415 C655,415 670,285 725,285 C780,285 785,440 835,440 C875,440 905,425 895,392 C886,360 846,352 846,380 C846,408 888,392 906,350 C920,315 928,230 925,160" vector-effect="non-scaling-stroke"/></svg>
+      <div class="jv" id="jv" hidden></div>
+      <div class="exp-wrap">
       <ul class="exp" data-v="path">{exp}
       </ul></div>
+      <script src="/assets/js/journey-v.js?v={ASSET_V}" defer></script>
     </div>
-    <div class="bfly" aria-hidden="true"><svg viewBox="0 0 100 80"><g class="wl"><g class="wing"><path d="M43 36C38 8 12 2 6 16C2 30 20 42 43 40Z"/><path d="M43 46C28 46 14 56 18 68C22 78 40 70 43 54Z"/></g></g><g class="wr" transform="translate(100 0) scale(-1 1)"><g class="wing"><path d="M43 36C38 8 12 2 6 16C2 30 20 42 43 40Z"/><path d="M43 46C28 46 14 56 18 68C22 78 40 70 43 54Z"/></g></g><rect class="body" x="46" y="24" width="8" height="46" rx="4"/><path class="ant" d="M47 24C44 14 40 10 35 9M53 24C56 14 60 10 65 9"/></svg></div>
     <div class="sticker a1" data-drag><span>ex-bank<br>teller</span></div>
     <div class="sticker a4" data-drag><span>now:<br>designer</span></div>
   </section>
@@ -362,81 +506,36 @@ def cozy_rows(sp):
     ).replace('<div class="srow">', '<div class="srow">')
 
 
+PAL = [("#D2F26F", "#16150f", "#16150f"), ("#F4B3A3", "#16150f", "#16150f"), ("#2233FF", "#fff", "#D2F26F")]
+ROT = ["-1.6deg", "1.2deg", "-0.8deg"]
+RAD = ["28px 14px 26px 16px", "14px 28px 16px 26px", "24px 18px 30px 14px"]
+
+
 def library_page():
     lib = json.load(open(f"{ROOT}/content/library.json", encoding="utf-8"))
-    books = lib["books"]
-    palette = [("#d2f26f", "#16150f"), ("#ffb4a2", "#16150f"), ("#1f2bff", "#d2f26f"), ("#ffffff", "#16150f"), ("#ffe27a", "#16150f"), ("#c9c2ff", "#16150f"), ("#a9d8ff", "#16150f")]
-    series_col, spines, hmax = {}, [], 0
-    for i, b in enumerate(books):
-        key = b.get("series") or f"b{i}"
-        if key not in series_col:
-            series_col[key] = palette[len(series_col) % len(palette)]
-        bg, fg = series_col[key]
-        cc = cover_colors(f"{ROOT}{b['cover']}") if b.get("cover") else None
-        acc = "currentColor"
-        if cc:
-            bg, fg, acc = cc
-        label = b.get("spine") or b["title"]
-        w = max(32, min(46, 28 + len(label) * .75))
-        h = max(240, min(300, round(200 + len(label) * 4)))
-        if b.get("series"):
-            h = 270
-        hmax = max(hmax, h)
-        rating = "" if b.get("rating") is None else b["rating"]
-        spines.append(
-            f'<div class="bk-w" data-genre="{e(b["genre"])}" data-status="{e(b.get("status", "read"))}">'
-            f'<button class="bk" style="--bg:{bg};--fg:{fg};--ac:{acc};--w:{w:.0f}px;--h:{h}px" '
-            f'data-title="{e(b["title"])}" data-author="{e(b["author"])}" data-genre="{e(b["genre"])}" '
-            f'data-status="{e(b.get("status", "read"))}" data-rating="{rating}" data-note="{e(b.get("note", ""))}" '
-            f'data-year="{e(str(b.get("year", "")))}" data-cover="{e(b.get("cover", ""))}" aria-label="{e(b["title"])} by {e(b["author"])}">'
-            f'<span class="bk-t">{e(label)}</span><span class="bk-a">{e(b["author"].split()[-1])}</span></button></div>'
+    byt = {b["title"]: b for b in lib["books"]}
+    cards = ""
+    for i, s in enumerate(lib["shelf"]):
+        b = byt[s["title"]]
+        cc = cover_colors(f"{ROOT}{b['cover']}") or ("#d2f26f", "#16150f", "#16150f")
+        cards += (
+            f'<article class="rl-card" style="--bg:{PAL[i%3][0]};--fg:{PAL[i%3][1]};--hc:{PAL[i%3][2]};--r:{ROT[i%3]};--rad:{RAD[i%3]};--i:{i}">'
+            f'<div class="rl-cv"><img src="{e(b["cover"])}" alt="Cover of {e(b["title"])}"></div>'
+            f'<div class="rl-info"><h3 class="rl-l">{e(s["label"])}</h3><h2>{e(b["title"])}</h2><p>by {e(b["author"])}</p></div></article>'
         )
-    libjson = json.dumps(books, ensure_ascii=False).replace("</", "<\\/")
-    genres = []
-    for b in books:
-        if b["genre"] not in genres:
-            genres.append(b["genre"])
-    pills = '<button class="on" data-f="">All</button>' + "".join(f'<button data-f="{e(g)}">{e(g)}</button>' for g in genres)
     return head("Library — Arushi", lib["intro"]) + f"""
-<body class="lib-page">
+<body class="lib-page rl-page">
 {nav('life')}
-<main class="lib">
-  <header class="lib-head">
+<main class="rl">
+  <header class="rl-head">
     <a class="back" href="/#life">← Beyond the portfolio</a>
     <div class="lib-title"><h1>{e(lib['title'])}</h1><span class="note n3">always reading</span></div>
     <p class="lede">{e(lib['intro'])}</p>
-    <p class="lib-count"><b id="libN">{len(books)}</b> books on the shelf</p>
-    <div class="room-switch" role="group" aria-label="Room style"><span>Room style</span><button type="button" data-style="real">Realistic</button><button type="button" data-style="cozy">Storybook</button></div>
   </header>
-  <div class="room">
-    {decor_cozy.FILTER}{decor.ALL}{decor_cozy.ALL}<div class="sunfloor"></div>
-    <div class="sunbeam"></div><div class="case">{decor_cozy.CASE_EXTRA}<div class="shelf" id="shelf" style="--row:{hmax + 30}px">{cozy_rows(spines)}</div></div>
-    <div class="floor"></div>
-  </div>
-  <script>
-  (function(){{var r=document.querySelector(".room"),b=document.querySelectorAll(".room-switch button");
-  function set(s){{r.classList.toggle("cozy",s==="cozy");b.forEach(function(x){{x.setAttribute("aria-pressed",x.dataset.style===s)}});try{{localStorage.setItem("roomStyle",s)}}catch(e){{}}}}
-  b.forEach(function(x){{x.onclick=function(){{set(x.dataset.style)}}}});
-  var v="real";try{{v=localStorage.getItem("roomStyle")||"real"}}catch(e){{}};set(v==="cozy"?"cozy":"real");}})();
-  </script>
-  <p class="lib-empty" hidden>Nothing on this shelf yet.</p>
-  <div class="lib-admin" hidden>
-    <b>Edit mode</b> <span>Changes show only in this browser until you export.</span>
-    <form class="lib-add"><input name="q" placeholder="Search a book to add (title or author)" required><button>Search</button></form>
-    <ul class="lib-res"></ul>
-    <button class="lib-export">Export library.json</button> <button class="lib-reset">Discard my edits</button>
-  </div>
+  <section class="rl-row" aria-label="Reading list">{cards}</section>
 </main>
-<div class="bk-pop" id="bkPop" hidden role="dialog" aria-modal="true" aria-label="Book details">
-  <div class="bk-card"><button class="bk-x" aria-label="Close">×</button>
-    <div class="bk-cv"><img alt=""></div>
-    <div class="bk-info"><span class="bk-g"></span><h2 class="bk-h"></h2><p class="bk-by"></p><p class="bk-r"></p>
-    <div class="bk-edit" hidden><div class="bk-stars" role="group" aria-label="Rating"></div><button class="bk-save">Save</button></div></div></div>
-</div>
 <footer><span>© 2026 Arushi</span><span><a href="/#life">Back to Off the clock</a></span></footer>
 <script src="/assets/js/main.js?v={ASSET_V}" defer></script>
-<script>window.__LIB={libjson};</script>
-<script src="/assets/js/library.js?v={ASSET_V}" defer></script>
 </body>
 </html>
 """
@@ -491,7 +590,7 @@ def poems_page():
 def gallery_page():
     g = json.load(open(f"{ROOT}/content/gallery.json", encoding="utf-8"))
     gj = json.dumps(g["items"], ensure_ascii=False).replace("</", "<\\/")
-    return head("Paint & pencil — Arushi", g["intro"]) + f"""
+    return head("Pen & colors — Arushi", g["intro"]) + f"""
 <body class="gl-page">
 {nav('life')}
 <main class="gl">
@@ -500,7 +599,7 @@ def gallery_page():
     <div class="gl-title"><h1>{e(g['title'])}</h1><span class="note n3">hands busy, eye sharp</span></div>
     <p class="lede">{e(g['intro'])}</p>
     <div class="gl-filters" role="group" aria-label="Filter">
-      <button class="on" data-f="all">All</button><button data-f="pencil">Pencil</button><button data-f="paint">Paint</button>
+      <button class="on" data-f="all">All</button><button data-f="pencil">Pen</button><button data-f="paint">Colors</button>
       <span class="gl-count"><b id="glN">0</b> pieces</span>
     </div>
   </header>
@@ -510,7 +609,7 @@ def gallery_page():
   <div class="gl-admin" hidden>
     <b>Edit mode</b> <span>Put image files in assets/art/, add them here, then export gallery.json and replace content/gallery.json. Changes show only in this browser until then.</span>
     <form><input type="text" name="title" placeholder="Title" required><input type="text" name="image" placeholder="Image path, e.g. /assets/art/cat.jpg">
-    <select name="medium"><option value="pencil">Pencil</option><option value="paint">Paint</option></select>
+    <select name="medium"><option value="pencil">Pen</option><option value="paint">Colors</option></select>
     <input type="text" name="year" placeholder="Year"><input type="text" name="note" placeholder="Short note (optional)">
     <label><input type="checkbox" name="wip"> Work in progress</label><button>Add piece</button></form>
     <div><button class="gl-export">Export gallery.json</button> <button class="gl-reset">Discard my edits</button></div>
@@ -520,9 +619,25 @@ def gallery_page():
   <button class="gl-x" aria-label="Close">×</button><button class="gl-prev" aria-label="Previous">←</button><button class="gl-next" aria-label="Next">→</button>
   <figure><div class="gl-img"></div><figcaption><h2></h2><p class="gl-meta"></p><p class="gl-note"></p><button class="gl-del" hidden>Remove this piece</button></figcaption></figure>
 </div>
+<div class="es" id="es" hidden aria-label="Artwork on an easel">
+  <div class="es-stage">
+    <svg class="es-legs" viewBox="0 0 300 450" aria-hidden="true">
+      <g stroke-linecap="round"><path d="M150 190 L150 430" stroke="#16150f" stroke-width="14"/><path d="M150 190 L150 430" stroke="#9c6a40" stroke-width="8"/>
+      <path d="M70 20 L28 440" stroke="#16150f" stroke-width="18"/><path d="M70 20 L28 440" stroke="#b98355" stroke-width="12"/>
+      <path d="M230 20 L272 440" stroke="#16150f" stroke-width="18"/><path d="M230 20 L272 440" stroke="#b98355" stroke-width="12"/>
+      <path d="M44 372 L256 372" stroke="#16150f" stroke-width="14"/><path d="M44 372 L256 372" stroke="#9c6a40" stroke-width="8"/></g>
+      <rect x="24" y="298" width="252" height="16" rx="6" fill="#b98355" stroke="#16150f" stroke-width="3.5"/>
+      <rect x="96" y="10" width="108" height="18" rx="6" fill="#b98355" stroke="#16150f" stroke-width="3.5"/>
+    </svg>
+    <div class="es-canvas"><img id="esImg" alt=""></div>
+    <div class="es-cap"><span id="esCap"></span></div>
+    <button class="es-nav es-prev" aria-label="Previous">←</button><button class="es-nav es-next" aria-label="Next">→</button>
+  </div>
+</div>
 <footer><span>© 2026 Arushi</span><span><a href="/#life">Back to Off the clock</a></span></footer>
 <script src="/assets/js/main.js?v={ASSET_V}" defer></script>
 <script>window.__ART={gj};</script>
+<script src="/assets/js/easel.js?v={ASSET_V}" defer></script>
 <script src="/assets/js/gallery.js?v={ASSET_V}" defer></script>
 </body>
 </html>
@@ -651,5 +766,12 @@ shutil.rmtree(f"{ROOT}/gallery", ignore_errors=True)
 write(f"{ROOT}/gallery/index.html", gallery_page())
 shutil.rmtree(f"{ROOT}/lab", ignore_errors=True)
 write(f"{ROOT}/lab/index.html", lab_page())
+shutil.rmtree(f"{ROOT}/blog", ignore_errors=True)
+shutil.rmtree(f"{ROOT}/post", ignore_errors=True)
+_posts = load_posts()
+write(f"{ROOT}/blog/index.html", blog_index_page())
+for _i, _b in enumerate(_posts):
+    write(f"{ROOT}/blog/{_b['slug']}/index.html", blog_post_page(_i, _b, _posts))
+    write(f"{ROOT}/post/{_b['slug']}/index.html", redirect_page(f"/blog/{_b['slug']}/"))
 write(f"{ROOT}/.nojekyll", "")
-print("built", 2 + len(projects), "pages")
+print("built", 3 + len(projects) + len(_posts), "pages")

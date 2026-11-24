@@ -19,6 +19,7 @@
 
   function render() {
     shown = list();
+    if (BOOK && shown.length > 1) shown = [shown[Math.floor(Math.random() * shown.length)]];
     grid.innerHTML = "";
     shown.forEach((p, i) => {
       const b = document.createElement("button");
@@ -126,9 +127,9 @@
       f.append(el("i", "bk-band"), el("div", "bk-ctitle", "Poems"), el("div", "bk-csub", "by arushi"), el("span", "bk-hint", "click to open"));
       f.setAttribute("role", "button"); f.tabIndex = 0; f.dataset.act = "next";
     }, (b) => b.classList.add("bk-inside")));
-    L.push(mk((f) => {
+    if (!shown.length) L.push(mk((f) => {
       page(f, "");
-      f.append(el("h2", "bk-hi", "Hi, this is Arushi’s poetry world."), el("p", "bk-sub", "A little notebook of the poems I’ve finished. Turn the page and wander in."), nudge("next page →", "next"));
+      f.append(el("h2", "bk-hi", "Poems are on their way."), el("p", "bk-sub", "Check back soon."), nudge("close the diary ↺", "close"));
     }, back));
     shown.forEach((p, i) => {
       L.push(mk((f) => {
@@ -141,13 +142,9 @@
         f.append(el("pre", "bk-text", p.text));
         if (typeof p.published === "string") { const a = el("a", "bk-link", "read it where it was published →"); a.href = p.published; a.target = "_blank"; a.rel = "noopener"; f.append(a); }
         if (EDIT) { const d = el("button", "bk-del", "remove"); d.type = "button"; d.onclick = (ev) => { ev.stopPropagation(); removePoem(p); }; f.append(d); }
-        f.append(nudge("← back", "prev", "bk-prev"), nudge("next page →", "next"));
+        f.append(nudge("close the diary ↺", "close"));
       }, back));
     });
-    L.push(mk((f) => {
-      page(f, shown.length + 1);
-      f.append(el("h2", "bk-hi", "That’s all for now ✦"), el("p", "bk-sub", "More poems when the ink dries."), nudge("← back", "prev", "bk-prev"), nudge("close the notebook ↺", "close"));
-    }, back));
     leaves = L;
     L.forEach((x) => bookEl.appendChild(x));
     wrap.appendChild(bookEl);
@@ -155,14 +152,16 @@
     wrap.addEventListener("click", (e) => {
       const t = e.target.closest("[data-act]"); if (!t) return;
       const a = t.dataset.act;
-      if (a === "next") go(turned + 1); else if (a === "prev") go(turned - 1); else if (a === "close") go(0);
+      if (a === "close") { go(0); if (list().length > 1) setTimeout(buildBook0, 1000); } else if (a === "next") go(turned + 1); else if (a === "prev") go(turned - 1);
     });
     wrap.addEventListener("keydown", (e) => { if (e.key === "Enter" && e.target.dataset && e.target.dataset.act === "next") go(turned + 1); });
     turned = 0; paint(true);
   }
+  function buildBook0() { render(); }
   function paint(instant) {
     const N = leaves.length;
     bookEl.classList.toggle("open", turned > 0);
+    if (parent !== window) parent.postMessage({ diaryOpen: turned > 0 }, "*");
     leaves.forEach((lf, i) => {
       const was = lf.classList.contains("turned"), is = i < turned;
       lf.classList.toggle("turned", is);
@@ -186,11 +185,12 @@
       if (e.key === "ArrowRight") go(turned + 1);
       if (e.key === "ArrowLeft") go(turned - 1);
     });
+    document.body.classList.add("pm-diary");
   }
 
   render();
   const h = location.hash.slice(1);
-  if (h) { const i = shown.findIndex((p) => slug(p.title) === h); if (i >= 0) { if (BOOK && desk) go(i + 2); else open(i); } }
+  if (h) { const i = shown.findIndex((p) => slug(p.title) === h); if (i >= 0) { if (BOOK && desk) go(1); else open(i); } }
 
   if (!EDIT) return;
   const admin = document.querySelector(".pm-admin");
