@@ -1,3 +1,10 @@
+// always land on the hero after a refresh
+if (document.getElementById("jv")) {
+  history.scrollRestoration = "manual";
+  if (location.hash) history.replaceState(null, "", location.pathname + location.search);
+  window.scrollTo(0, 0);
+}
+
 const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 // scroll reveal
@@ -135,80 +142,58 @@ if (themer) {
   mark();
 }
 
-// journey butterfly: scroll-driven trail
-(() => {
-  const wrap = document.querySelector(".exp-wrap");
-  const bfly = document.querySelector(".bfly");
-  const need = document.querySelector(".need");
-  const about = document.querySelector(".about");
-  const svg = wrap && wrap.querySelector(".exp-line");
-  const path = svg && svg.querySelector(".trail-path");
-  const mask = svg && svg.querySelector(".trail-mask");
-  if (!bfly || !need || !path || matchMedia("(max-width: 860px)").matches) return;
-  const lis = [...wrap.querySelectorAll(".exp li")].reverse();
-  const total = path.getTotalLength();
-  const N = 1600, pts = [];
-  for (let i = 0; i <= N; i++) { const q = path.getPointAtLength((total * i) / N); pts.push([q.x, q.y]); }
-  let prev = 0;
-  const stops = lis.map((li) => {
-    const x = parseFloat(li.style.left) || (li.offsetLeft / wrap.offsetWidth) * 1000;
-    const y = parseFloat(li.style.top) || (li.offsetTop / wrap.offsetHeight) * 600;
-    let best = prev, bd = Infinity;
-    for (let i = prev; i <= N; i++) { const d = (pts[i][0] - x) ** 2 + (pts[i][1] - y) ** 2; if (d < bd) { bd = d; best = i; } }
-    prev = best;
-    return best / N;
+// off the clock iframe: auto height, fullscreen while inside a room
+(function () {
+  const f = document.querySelector(".otc");
+  if (!f) return;
+  addEventListener("message", (e) => {
+    if (e.source !== f.contentWindow || !e.data || !e.data.otc) return;
+    const was = f.classList.contains("full");
+    f.classList.toggle("full", e.data.room);
+    document.documentElement.style.overflow = e.data.room ? "hidden" : "";
+    if (!e.data.room && e.data.h) f.style.height = e.data.h + "px";
+    if (was && !e.data.room) document.getElementById("life").scrollIntoView({ block: "start" });
   });
-  window.__bf = () => ({ prog, stops, total, n: lis.length });
-  wrap.classList.add("anim");
-  mask.style.strokeDasharray = "1000";
-  const clamp = (v) => Math.max(0, Math.min(1, v));
-  const ease = (t) => t * t * (3 - 2 * t);
-  let flyT, prog = reduce ? 1 : 0, playing = false, t0 = 0;
-  const DUR = 7000;
-  const frame = () => {
-    const vh = innerHeight, r = wrap.getBoundingClientRect();
-    const s = prog;
-    const pf = clamp(s / 0.8), ff = ease(clamp((s - 0.8) / 0.2));
-    mask.style.strokeDashoffset = String(1000 * (1 - pf));
-    lis.forEach((li, i) => li.classList.toggle("seen", pf >= stops[i] - 0.005));
-    const sr = svg.getBoundingClientRect(), ar = about.getBoundingClientRect();
-    const at = (f) => { const q = path.getPointAtLength(total * f); return [sr.left + (q.x / 1000) * sr.width, sr.top + (q.y / 600) * sr.height]; };
-    let [x, y] = at(pf);
-    const a = at(Math.max(0, pf - 0.01)), b = at(Math.min(1, pf + 0.01));
-    let tilt = Math.max(-25, Math.min(25, (Math.atan2(b[1] - a[1], b[0] - a[0]) * 180) / Math.PI * 0.35));
-    if (ff > 0) {
-      const nr = need.getBoundingClientRect();
-      const tx = nr.right + 46, ty = nr.top + nr.height * 0.45;
-      const cx = x, cy = ty;
-      const u = 1 - ff;
-      const nx = u * u * x + 2 * u * ff * cx + ff * ff * tx;
-      const ny = u * u * y + 2 * u * ff * cy + ff * ff * ty;
-      tilt = -14 * ff * u * 4 + 8 * ff;
-      x = nx; y = ny;
-    }
-    bfly.style.transform = `translate(${x - ar.left - 36}px, ${y - ar.top - 29}px) rotate(${tilt}deg)`;
-    bfly.classList.toggle("on", s > 0.001 || reduce);
-  };
-  const step = (now) => {
-    prog = clamp((now - t0) / DUR);
-    bfly.classList.add("fly"); clearTimeout(flyT);
-    frame();
-    if (prog < 1) requestAnimationFrame(step);
-    else { playing = false; bfly.classList.remove("fly"); }
-  };
-  const play = () => { if (playing || prog >= 1) return; playing = true; t0 = performance.now(); requestAnimationFrame(step); };
-  const watch = () => {
-    const r = wrap.getBoundingClientRect(), vh = innerHeight;
-    const vis = Math.min(r.bottom, vh) - Math.max(r.top, 0);
-    if (!reduce && vis > r.height * 0.7) play();
-    else if (!reduce && !playing && prog >= 1 && r.top > vh) { prog = 0; frame(); }
-  };
-  let tick = false;
-  const onScroll = () => {
-    watch();
-    if (!tick) { tick = true; requestAnimationFrame(() => { tick = false; frame(); }); }
-  };
-  addEventListener("scroll", onScroll, { passive: true });
-  addEventListener("resize", frame);
-  frame();
 })();
+
+// pop library / poems up over the page
+(function () {
+  const f = document.querySelector(".otc");
+  if (!f) return;
+  addEventListener("message", (e) => {
+    if (e.data && typeof e.data === "object" && "diaryOpen" in e.data) { const x = document.querySelector(".pop-x"); if (x) x.hidden = !!e.data.diaryOpen; return; }
+    if (e.data && e.data.popClose) { const o = document.querySelector(".pop"); if (o) o.click(); return; }
+    if (e.source !== f.contentWindow || !e.data || !e.data.otcOpen) return;
+    if (document.querySelector(".pop")) return;
+    const m = document.createElement("div");
+    m.className = "pop";
+    m.innerHTML = '<button class="pop-x" aria-label="Close">×</button><iframe title="Popup" src="' + e.data.otcOpen + '?embed&t=' + Date.now() + '"></iframe>';
+    const fit = () => {
+      try {
+        const d = m.querySelector("iframe").contentDocument, c = d.querySelectorAll(".rl-card");
+        const t = c.length ? c[c.length - 1] : d.querySelector(".es-canvas");
+        if (!t) return;
+        const x = m.querySelector(".pop-x"), es = d.querySelector(".es-stage");
+        if (es) {
+          const h = Math.min(innerHeight * 0.86, 860), w = Math.min(h * 2 / 3, innerWidth * 0.94);
+          x.style.left = innerWidth / 2 + w / 2 + 4 + "px";
+          x.style.top = Math.max(8, innerHeight / 2 - h / 2 + 8) + "px";
+          return;
+        }
+        const r = t.getBoundingClientRect();
+        x.style.left = r.right - 24 + "px"; x.style.top = Math.max(6, r.top - 20) + "px";
+      } catch (_) {}
+    };
+    m.querySelector("iframe").addEventListener("load", () => { fit(); setTimeout(fit, 900); });
+    addEventListener("resize", fit);
+    const close = () => { m.remove(); document.documentElement.style.overflow = ""; removeEventListener("keydown", esc); };
+    const esc = (k) => k.key === "Escape" && close();
+    m.addEventListener("click", (k) => { if (k.target === m || k.target.classList.contains("pop-x")) close(); });
+    addEventListener("keydown", esc);
+    document.documentElement.style.overflow = "hidden";
+    document.body.appendChild(m);
+  });
+})();
+
+if (document.documentElement.classList.contains("embed"))
+  addEventListener("click", (e) => { if (!e.target.closest(".rl-card,.pm-desk,.pop-x,.es-stage")) parent.postMessage({popClose: 1}, "*"); });

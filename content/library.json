@@ -1,0 +1,247 @@
+{
+  "title": "Library",
+  "intro": "Stories are where most of my ideas start. Here’s what I’m reading right now.",
+  "books": [
+    {
+      "title": "Harry Potter and the Philosopher's Stone",
+      "spine": "Philosopher's Stone",
+      "author": "J.K. Rowling",
+      "genre": "Fantasy",
+      "series": "Harry Potter",
+      "status": "read",
+      "rating": null,
+      "note": "",
+      "cover": "/assets/covers/harry-potter-and-the-philosopher-s-stone.jpg"
+    },
+    {
+      "title": "Harry Potter and the Chamber of Secrets",
+      "spine": "Chamber of Secrets",
+      "author": "J.K. Rowling",
+      "genre": "Fantasy",
+      "series": "Harry Potter",
+      "status": "read",
+      "rating": null,
+      "note": "",
+      "cover": "/assets/covers/harry-potter-and-the-chamber-of-secrets.jpg"
+    },
+    {
+      "title": "Harry Potter and the Prisoner of Azkaban",
+      "spine": "Prisoner of Azkaban",
+      "author": "J.K. Rowling",
+      "genre": "Fantasy",
+      "series": "Harry Potter",
+      "status": "read",
+      "rating": null,
+      "note": "",
+      "cover": "/assets/covers/harry-potter-and-the-prisoner-of-azkaban.jpg"
+    },
+    {
+      "title": "Harry Potter and the Goblet of Fire",
+      "spine": "Goblet of Fire",
+      "author": "J.K. Rowling",
+      "genre": "Fantasy",
+      "series": "Harry Potter",
+      "status": "read",
+      "rating": null,
+      "note": "",
+      "cover": "/assets/covers/harry-potter-and-the-goblet-of-fire.jpg"
+    },
+    {
+      "title": "Harry Potter and the Order of the Phoenix",
+      "spine": "Order of the Phoenix",
+      "author": "J.K. Rowling",
+      "genre": "Fantasy",
+      "series": "Harry Potter",
+      "status": "read",
+      "rating": null,
+      "note": "",
+      "cover": "/assets/covers/harry-potter-and-the-order-of-the-phoenix.jpg"
+    },
+    {
+      "title": "Harry Potter and the Half-Blood Prince",
+      "spine": "Half-Blood Prince",
+      "author": "J.K. Rowling",
+      "genre": "Fantasy",
+      "series": "Harry Potter",
+      "status": "read",
+      "rating": null,
+      "note": "",
+      "cover": "/assets/covers/harry-potter-and-the-half-blood-prince.jpg"
+    },
+    {
+      "title": "Harry Potter and the Deathly Hallows",
+      "spine": "Deathly Hallows",
+      "author": "J.K. Rowling",
+      "genre": "Fantasy",
+      "series": "Harry Potter",
+      "status": "read",
+      "rating": null,
+      "note": "",
+      "cover": "/assets/covers/harry-potter-and-the-deathly-hallows.jpg"
+    },
+    {
+      "title": "Aarushi",
+      "author": "Avirook Sen",
+      "genre": "True crime",
+      "status": "read",
+      "rating": null,
+      "note": "",
+      "cover": "/assets/covers/aarushi.jpg"
+    },
+    {
+      "title": "Aruna's Story: The True Account of a Rape and Its Aftermath",
+      "spine": "Aruna's Story",
+      "author": "Pinki Virani",
+      "genre": "Non-fiction",
+      "status": "read",
+      "rating": null,
+      "note": "",
+      "cover": "/assets/covers/aruna-s-story-the-true-account-of-a-rape-and-its-aftermath.jpg"
+    },
+    {
+      "title": "The Palace of Illusions",
+      "author": "Chitra Banerjee Divakaruni",
+      "genre": "Mythological fiction",
+      "status": "read",
+      "rating": null,
+      "note": "",
+      "cover": "/assets/covers/the-palace-of-illusions.jpg"
+    },
+    {
+      "title": "The Forest of Enchantments",
+      "author": "Chitra Banerjee Divakaruni",
+      "genre": "Mythological fiction",
+      "status": "read",
+      "rating": null,
+      "note": "",
+      "cover": "/assets/covers/the-forest-of-enchantments.jpg"
+    },
+    {
+      "title": "The Secret Garden",
+      "author": "Frances Hodgson Burnett",
+      "genre": "Classic",
+      "status": "read",
+      "rating": null,
+      "note": "",
+      "cover": "/assets/covers/the-secret-garden.jpg"
+    },
+    {
+      "title": "The Bell Jar",
+      "author": "Sylvia Plath",
+      "genre": "Literary fiction",
+      "status": "read",
+      "rating": null,
+      "note": "",
+      "cover": "/assets/covers/the-bell-jar.jpg"
+    },
+    {
+      "title": "The Kite Runner",
+      "author": "Khaled Hosseini",
+      "genre": "Literary fiction",
+      "series": "",
+      "status": "read",
+      "rating": null,
+      "note": "",
+      "cover": "/assets/covers/the-kite-runner.jpg"
+    },
+    {
+      "title": "A Thousand Splendid Suns",
+      "author": "Khaled Hosseini",
+      "genre": "Literary fiction",
+      "series": "",
+      "status": "read",
+      "rating": null,
+      "note": "",
+      "cover": "/assets/covers/a-thousand-splendid-suns.jpg"
+    },
+    {
+      "title": "Men Are from Mars, Women Are from Venus",
+      "author": "John Gray",
+      "genre": "Self-help",
+      "series": "",
+      "status": "read",
+      "rating": null,
+      "note": "",
+      "spine": "Men Are from Mars",
+      "cover": "/assets/covers/men-are-from-mars-women-are-from-venus.jpg"
+    },
+    {
+      "title": "Anusual: Memoir of a Girl Who Came Back from the Dead",
+      "author": "Anu Aggarwal",
+      "genre": "Memoir",
+      "series": "",
+      "status": "read",
+      "rating": null,
+      "note": "",
+      "spine": "Anusual",
+      "cover": "/assets/covers/anusual-memoir-of-a-girl-who-came-back-from-the-dead.jpg"
+    },
+    {
+      "title": "26/11: The Attack on Mumbai",
+      "author": "Vir Sanghvi",
+      "genre": "Non-fiction",
+      "series": "",
+      "status": "read",
+      "rating": null,
+      "note": "",
+      "spine": "26/11",
+      "cover": "/assets/covers/26-11-the-attack-on-mumbai.jpg"
+    },
+    {
+      "title": "Wings of Fire",
+      "author": "A. P. J. Abdul Kalam",
+      "genre": "Autobiography",
+      "series": "",
+      "status": "read",
+      "rating": null,
+      "note": "",
+      "cover": "/assets/covers/wings-of-fire.jpg"
+    },
+    {
+      "title": "I Am Malala",
+      "author": "Malala Yousafzai",
+      "genre": "Autobiography",
+      "series": "",
+      "status": "read",
+      "rating": null,
+      "note": "",
+      "cover": "/assets/covers/i-am-malala.jpg"
+    },
+    {
+      "title": "The Diary of a Young Girl",
+      "spine": "The Diary of Anne Frank",
+      "author": "Anne Frank",
+      "genre": "Autobiography",
+      "series": null,
+      "status": "read",
+      "rating": null,
+      "note": "",
+      "cover": "/assets/covers/the-diary-of-a-young-girl.jpg"
+    },
+    {
+      "title": "The Subtle Art of Not Giving a F*ck",
+      "spine": "The Subtle Art",
+      "author": "Mark Manson",
+      "genre": "Self-help",
+      "series": null,
+      "status": "read",
+      "rating": null,
+      "note": "",
+      "cover": "/assets/covers/the-subtle-art-of-not-giving-a-f-ck.jpg"
+    }
+  ],
+  "shelf": [
+    {
+      "label": "Last read",
+      "title": "Harry Potter and the Goblet of Fire"
+    },
+    {
+      "label": "Currently reading",
+      "title": "The Forest of Enchantments"
+    },
+    {
+      "label": "Next on the list",
+      "title": "The Palace of Illusions"
+    }
+  ]
+}
