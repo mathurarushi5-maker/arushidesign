@@ -677,73 +677,22 @@ def screen_links(links):
 def lab_page(v2=False):
     g = json.load(open(f"{ROOT}/content/lab.json", encoding="utf-8"))
     gj = json.dumps(g["items"], ensure_ascii=False).replace("</", "<\\/")
-    return head("Lab — Arushi", g["intro"]) + f"""
-<body class="{'lb-page lb-v2' if v2 else 'lb-page'}">
+    return head("Lab — Arushi", g["intro"]).replace("</head>", f'<link rel="stylesheet" href="/assets/css/lab2.css?v={ASSET_V}">\n</head>') + f"""
+<body>
+<div class="grain"></div>
 {nav('life')}
-<main class="lbm">
-  <div class="lb-room">
-  <header class="lb-head">
-    <a class="back" href="/#life">← Beyond the portfolio</a>
-    <div class="room-switch lb-switch" role="group" aria-label="Room style"><span>room</span><button type="button" data-v="1" aria-pressed="true">Sunlit Studio</button><button type="button" data-v="2" aria-pressed="false">Realistic</button></div>
-    <div class="lb-title"><h1>{e(g['title'])}</h1><span class="note n3">ai tinkering</span></div>
-    <p class="lede">{e(g['intro'])}</p>
-    <p class="lb-tip">click anything on the laptop screen to open it</p>
-  </header>
-  <div class="lb-scene" aria-label="Laptop on a desk">
-    <div class="sc-window" aria-hidden="true"><i class="p1"></i><i class="p2"></i><i class="rail"></i></div>
-    <div class="sc-wall" aria-hidden="true"></div>
-    <div class="sc-beam" aria-hidden="true"></div>
-    <div class="sc-sill" aria-hidden="true"></div>
-    <div class="sc-ceil" aria-hidden="true"></div>
-    <div class="sc-desk" aria-hidden="true"><i class="tt"></i></div>
-    <div class="sc-patch" aria-hidden="true"></div>
-    <div class="sc-floor" aria-hidden="true"></div>
-    <div class="sc-leg l" aria-hidden="true"></div><div class="sc-leg r" aria-hidden="true"></div>
-    <div class="sc-edge" aria-hidden="true"></div>
-    <div class="sc-cloth" aria-hidden="true"></div>
-    <i class="sh sh-mug"></i><i class="sh sh-dish"></i><i class="sh sh-pot"></i><i class="sh sh-vase"></i><i class="sh sh-lap"></i>
-    {GARLAND}{HANG1}{HANG2}{VINE}
-    {DOODLES}
-    {MUG}{DISH}{MONSTERA}{VASE}
-    {screen_links(g.get("links",{}))}
-    <div class="sc-laptop">
-    <div class="lb-laptop">
-      <div class="lb-lid"><div class="lb-cam"></div>
-        <div class="lb-screen" id="lbScreen">
-          <div class="lb-menubar"><b>◉ lab</b><span>experiments</span><span class="lb-clock" id="lbClock"></span></div>
-          <div class="lb-icons" id="lbIcons"></div>
-          <p class="lb-empty" hidden>Empty desktop. Experiments are on their way.</p>
-          <div class="lb-win" id="lbWin" hidden role="dialog" aria-label="Experiment">
-            <div class="lb-bar"><span class="lb-dots"><button class="d-r" aria-label="Close"></button><button class="d-y" aria-label="Back to desktop"></button><button class="d-g" aria-label="Full screen"></button></span><span class="lb-wt"></span><button class="lb-fs">⤢ full screen</button></div>
-            <div class="lb-body"><div class="lb-shot"></div>
-              <h2></h2><p class="lb-meta"></p><p class="lb-tools"></p>
-              <h4>What I tried</h4><p class="lb-what"></p><h4>What I learned</h4><p class="lb-learn"></p>
-              <a class="lb-try" target="_blank" rel="noopener">try it →</a><button class="lb-del" hidden>Remove</button></div>
-          </div>
-        </div>
-      </div>
-      <div class="lb-base"><i></i></div>
-    </div>
-    </div>
-  </div>
-  </div>
-  <noscript><p>Please enable JavaScript to see the experiments.</p></noscript>
-  <div class="lb-admin" hidden>
-    <b>Edit mode</b> <span>Add experiments, then export lab.json and replace content/lab.json. Screenshots go in assets/lab/. An embed URL shows a live page inside the window. Changes show only in this browser until then.</span>
-    <form><input type="text" name="title" placeholder="Name" required>
-    <select name="type"><option>prototype</option><option>image</option><option>agent</option><option>workflow</option></select>
-    <select name="status"><option value="works">works</option><option value="cooking">still cooking</option><option value="broken">broken</option></select>
-    <input type="text" name="date" placeholder="Date, e.g. Nov 2026"><input type="text" name="tools" placeholder="Tools, comma separated">
-    <input type="text" name="what" placeholder="What I tried"><input type="text" name="learned" placeholder="What I learned"><input type="text" name="link" placeholder="Try-it link (optional)"><input type="text" name="image" placeholder="Screenshot path (optional)"><input type="text" name="embed" placeholder="Embed URL for live demo (optional)">
-    <button>Add experiment</button></form>
-    <div><button class="lb-export">Export lab.json</button> <button class="lb-reset">Discard my edits</button></div>
-  </div>
+<main class="li">
+  <div class="li-top"><a class="li-back" href="/#life">← Beyond the portfolio</a></div>
+  <h1>{e(g['title'])} <span class="note">ai tinkering</span></h1>
+  <p class="li-sub">{e(g['intro'])}</p>
+  <div id="views"></div>
+  <span class="sample">Entries marked “Sample …” are placeholders until I add real experiments.</span>
 </main>
+<div class="pop" id="pop"><div class="pop-s"><button aria-label="Close">×</button><div id="popIn"></div></div></div>
 <footer><span>© 2026 Arushi</span><span><a href="/#life">Back to Off the clock</a></span></footer>
 <script src="/assets/js/main.js?v={ASSET_V}" defer></script>
 <script>window.__LAB={gj};</script>
-<script src="/assets/js/lab.js?v={ASSET_V}" defer></script>
-<script>(function(){{var b=document.body,k='lbRoom',sw=document.querySelectorAll('.lb-switch button');function set(v){{b.classList.toggle('lb-v2',v==='2');sw.forEach(function(x){{x.setAttribute('aria-pressed',x.dataset.v===v)}});try{{localStorage.setItem(k,v)}}catch(e){{}}}}sw.forEach(function(x){{x.onclick=function(){{set(x.dataset.v)}}}});var q=(location.search.match(/room=(\d)/)||[])[1];var s;try{{s=localStorage.getItem(k)}}catch(e){{}}set(q||s||'1')}})()</script>
+<script src="/assets/js/lab2.js?v={ASSET_V}" defer></script>
 </body>
 </html>
 """
