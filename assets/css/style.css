@@ -1300,7 +1300,7 @@ html.embed,.embed body{background:transparent!important}
 @media (min-width: 861px) {
   .hero { --d: min(.0625vw, 1px); }
   .hero .lede { max-width: min(612px, max(340px, calc(680*var(--d)))); }
-  .hero .s1 { left: calc(50% - 610*var(--d)); top: calc(50% - 420*var(--d)); width: calc(150*var(--d)); height: calc(150*var(--d)); font-size: calc(22*var(--d)); }
+  .hero .s1 { left: calc(50% - 554*var(--d)); top: calc(50% - 374*var(--d)); width: calc(150*var(--d)); height: calc(150*var(--d)); font-size: calc(22*var(--d)); }
   .hero .s4 { left: calc(50% + 461*var(--d)); top: calc(50% - 346*var(--d)); width: calc(90*var(--d)); height: calc(90*var(--d)); border-width: calc(5*var(--d)); }
   .hero .s2 { left: calc(50% - 507*var(--d)); top: calc(50% + 137*var(--d)); width: calc(110*var(--d)); height: calc(110*var(--d)); }
   .hero .s3 { left: calc(50% + 388*var(--d)); top: calc(50% + 84*var(--d)); width: calc(130*var(--d)); height: calc(90*var(--d)); font-size: calc(34*var(--d)); border-radius: calc(22*var(--d)); }

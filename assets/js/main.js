@@ -1,8 +1,14 @@
 // always land on the hero after a refresh
 if (document.getElementById("jv")) {
   history.scrollRestoration = "manual";
-  if (location.hash) history.replaceState(null, "", location.pathname + location.search);
-  window.scrollTo(0, 0);
+  const nav = performance.getEntriesByType("navigation")[0];
+  if (location.hash === "#life" && nav && nav.type !== "reload") {
+    const go = () => document.getElementById("life").scrollIntoView({ block: "start" });
+    go(); addEventListener("load", go);
+  } else {
+    if (location.hash) history.replaceState(null, "", location.pathname + location.search);
+    window.scrollTo(0, 0);
+  }
 }
 
 const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;

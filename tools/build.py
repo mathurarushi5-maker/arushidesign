@@ -683,8 +683,8 @@ def lab_page(v2=False):
 {nav('life')}
 <main class="li">
   <div class="li-top"><a class="li-back" href="/#life">← Beyond the portfolio</a></div>
-  <h1>{e(g['title'])} <span class="note">ai tinkering</span></h1>
-  <p class="li-sub">{e(g['intro'])}</p>
+  <h1>My Lab</h1>
+  <p class="li-sub">A corkboard of AI side projects, half-finished ideas and happy accidents. Prompts, prototypes and the occasional face-plant, all in one place.</p>
   <div id="views"></div>
   <span class="sample">Entries marked “Sample …” are placeholders until I add real experiments.</span>
 </main>
