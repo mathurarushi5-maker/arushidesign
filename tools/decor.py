@@ -51,7 +51,7 @@ CHAIR = f'''<svg class="decor chair" viewBox="0 0 290 250" aria-hidden="true">
 <path d="M56 30 H168 L158 78 Q108 92 70 76Z" fill="#ff8f9c" {S}/>
 <path d="M82 154 Q128 182 170 152 L184 214 Q130 226 88 212Z" fill="#ff8f9c" {S}/>
 <g transform="rotate(-9 100 100)"><rect x="66" y="64" width="84" height="64" rx="14" fill="#2b36c9" {S}/></g>
-<g transform="rotate(8 170 110)"><rect x="128" y="76" width="78" height="58" rx="14" fill="#1f2bff" {S}/></g></svg>'''
+<g transform="rotate(8 170 110)"><rect x="128" y="76" width="78" height="58" rx="14" fill="#6b4eff" {S}/></g></svg>'''
 
 TABLE = f'''<svg class="decor table" viewBox="0 0 160 300" aria-hidden="true">
 <rect x="76" y="164" width="8" height="118" fill="#8a5a2f" {S} stroke-width="3"/>

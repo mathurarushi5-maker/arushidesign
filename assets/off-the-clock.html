@@ -2715,6 +2715,7 @@ function sideHTML(){return '<g id="sRoot" style="display:none">'+
     ['fTop','fPelvis','aLo','aRo','fBook','bLegs','fLegs'].forEach(function(id){F[id].style.opacity=bo;});
     F.fBook.setAttribute('transform','translate(0 '+(10*cur.lean).toFixed(1)+')');
     F.fBook.style.display=(u<.34)?'':'none';
+    F.aLf.style.display=F.aRf.style.display=(u<.34)?'none':'';
     F.caps.style.display=(u<.34)?'none':'';
     ['R','L'].forEach(function(sd){['r','o','g'].forEach(function(k){F['a'+sd+'h'+k].style.display=(hand[sd]===k&&k!=='g')?'':'none';});});
     F.aRu.setAttribute('transform','rotate('+armR.u.toFixed(1)+')'); F.aRf.setAttribute('transform','translate(0,22) rotate('+armR.f.toFixed(1)+')');

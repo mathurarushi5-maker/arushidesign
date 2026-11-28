@@ -20,7 +20,7 @@
     d.className = "gl-art";
     if (p.image) { const i = document.createElement("img"); i.src = p.image; i.alt = p.title; i.loading = "lazy"; d.appendChild(i); }
     else d.innerHTML = p.medium === "paint"
-      ? '<svg viewBox="0 0 120 90" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><rect width="120" height="90" fill="#a9d8ff"/><circle cx="92" cy="22" r="11" fill="#ffe27a"/><path d="M0 70 Q30 40 60 62 T120 52 V90 H0Z" fill="#c8f560"/><path d="M0 78 Q40 60 120 74 V90 H0Z" fill="#6fb04a"/></svg>'
+      ? '<svg viewBox="0 0 120 90" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><rect width="120" height="90" fill="#a9d8ff"/><circle cx="92" cy="22" r="11" fill="#ffe27a"/><path d="M0 70 Q30 40 60 62 T120 52 V90 H0Z" fill="#bfeed6"/><path d="M0 78 Q40 60 120 74 V90 H0Z" fill="#6fb04a"/></svg>'
       : '<svg viewBox="0 0 120 90" aria-hidden="true"><path d="M20 70 C30 20 50 20 60 45 S90 70 100 25" fill="none" stroke="#3a2f22" stroke-width="2.2" stroke-linecap="round"/><path d="M24 74 C34 28 52 30 62 50 S88 72 98 32" fill="none" stroke="#3a2f22" stroke-width="1" opacity=".5" stroke-linecap="round"/></svg>';
     return d;
   }

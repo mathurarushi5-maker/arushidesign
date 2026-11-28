@@ -7,7 +7,7 @@
   let ed = { added: [], removed: [] };
   try { ed = Object.assign(ed, JSON.parse(localStorage.getItem(KEY) || "{}")); } catch (e) {}
   const save = () => localStorage.setItem(KEY, JSON.stringify(ed));
-  const T = { prototype: ["Pr", "#c8f560"], image: ["Im", "#ffb4a2"], agent: ["Ag", "#a9d8ff"], workflow: ["Wf", "#ffe27a"] };
+  const T = { prototype: ["Pr", "#bfeed6"], image: ["Im", "#ffb4a2"], agent: ["Ag", "#a9d8ff"], workflow: ["Wf", "#ffe27a"] };
   const ST = { works: "works", cooking: "still cooking", broken: "broken" };
   const SAMPLE = [["Sample prototype", "prototype", "works"], ["Sample image study", "image", "cooking"], ["Sample agent", "agent", "broken"], ["Sample workflow", "workflow", "works"], ["Sample UI remix", "prototype", "cooking"], ["Sample poster", "image", "works"], ["Sample helper", "agent", "works"]]
     .map(([title, type, status], i) => ({ title, type, status, date: "Demo " + (i + 1), tools: ["Tool A", "Tool B"], what: "Placeholder: what I tried.", learned: "Placeholder: what I learned.", link: "" }));

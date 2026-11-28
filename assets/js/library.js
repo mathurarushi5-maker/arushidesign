@@ -9,7 +9,7 @@
   let ed = { over: {}, added: [] };
   try { ed = Object.assign(ed, JSON.parse(localStorage.getItem(KEY) || "{}")); } catch (e) {}
   const save = () => localStorage.setItem(KEY, JSON.stringify(ed));
-  const PAL = [["#d2f26f", "#16150f"], ["#ffb4a2", "#16150f"], ["#1f2bff", "#d2f26f"], ["#ffffff", "#16150f"], ["#ffe27a", "#16150f"], ["#c9c2ff", "#16150f"], ["#a9d8ff", "#16150f"]];
+  const PAL = [["#d2f26f", "#16150f"], ["#ffb4a2", "#16150f"], ["#6b4eff", "#d2f26f"], ["#ffffff", "#16150f"], ["#ffe27a", "#16150f"], ["#c9c2ff", "#16150f"], ["#a9d8ff", "#16150f"]];
 
   function fill(btn, b) {
     const d = btn.dataset;

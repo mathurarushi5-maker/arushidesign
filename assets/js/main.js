@@ -83,7 +83,7 @@ if (lb) {
 // confetti burst
 function burst(x, y) {
   if (reduce) return;
-  const cols = ["#c8f560", "#1f2bff", "#ffb4a2", "#f6f1e7"];
+  const cols = ["#bfeed6", "#6b4eff", "#ffb4a2", "#fdf1f1"];
   for (let i = 0; i < 24; i++) {
     const c = document.createElement("i");
     c.className = "confetti";

@@ -21,7 +21,7 @@ const html={
   const CP=[[3,48,-3],[27,78,2],[51,36,-2],[75,66,3],[14,372,2],[38,392,-2]];
   const TG=['wip','done','','now tinkering ✦','','done'];
   const cards=D.map((p,i)=>{const c=CP[i%6];return `<div class="stk pl" data-i="${i}" style="--x:${c[0]}%;--y:${c[1]}px;--r:${c[2]}deg" role="button" aria-label="Open ${nm(p)}">${shot(p)}${TG[i]?`<span class="tag t${i%3}">${TG[i]}</span>`:''}<span class="open">open ↗</span>${nm(p)}</div>`}).join('');
-  const sw=['#1f2bff','#c8f560','#ff9db8','#ffd23f','#16150f'].map(c=>`<i style="background:${c}"></i>`).join('');
+  const sw=['#6b4eff','#bfeed6','#ff9db8','#ffd23f','#16150f'].map(c=>`<i style="background:${c}"></i>`).join('');
   const cal=Array.from({length:28},(_,i)=>`<u class="${i===17?'ring':''}">${i+1}</u>`).join('');
   const S=[
    [0.5,10,-40,'sn-washi',''],[94,660,-38,'sn-washi w2',''],
@@ -37,7 +37,7 @@ const html={
    [1.4,599,2,'sn-award','<div class="ros">★</div><b>GenAI Hackathon 2026</b><span>award</span>'],
    [86.7,619,-2,'sn-pink','<span>“Sample quote goes here.”</span><em>— someone worth quoting</em>'],
    [12.7,649,3,'sn-biz','<b>Arushi</b><span>product designer</span>'],
-   [90,40,-6,'sn-doodle2','<svg viewBox="0 0 120 80" fill="none" stroke="#1f2bff" stroke-width="3" stroke-linecap="round"><path d="M8 60C30 10 70 10 104 44"/><path d="M88 36L106 46L92 60"/></svg>']
+   [90,40,-6,'sn-doodle2','<svg viewBox="0 0 120 80" fill="none" stroke="#6b4eff" stroke-width="3" stroke-linecap="round"><path d="M8 60C30 10 70 10 104 44"/><path d="M88 36L106 46L92 60"/></svg>']
   ].map(x=>`<div class="sn pl ${x[3]}" style="--x:${x[0]}%;--y:${x[1]}px;--r:${x[2]}deg">${x[4]}</div>`).join('');
   const string=`<svg class="string" viewBox="0 0 1000 740" preserveAspectRatio="none" aria-hidden="true"><g fill="none" stroke="#c8262b" stroke-width="2.4" vector-effect="non-scaling-stroke" stroke-linecap="round"><path d="M135 56Q255 8 375 86"/><path d="M375 86Q495 14 615 44"/><path d="M615 44Q735 6 855 74"/><path d="M375 86Q250 220 245 380"/><path d="M245 380Q365 340 485 400"/></g></svg>`;
   return `<p class="note" style="margin-bottom:16px">click a card to open it · drag the little things around</p><div class="cork">${S}${cards}</div>`},
